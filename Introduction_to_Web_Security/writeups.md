@@ -7,7 +7,7 @@ Category : General Information (50pts)
 
 Challenge Description : The art of hiding messages or information inside other image / text or data
 
-> Answer : steganography
+> flag : steganography
 
 -------------------------------------------------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ Challenge Description : Flag is restricted to logged users only, can you be one 
 
 Link : [http://34.77.37.110/restricted-sessions/](http://34.77.37.110/restricted-sessions/)
 
-## Solution
+#### Solution
 
 The website is empty with a message.
 ![message](images/restricted_session/restricted1.png)
@@ -43,11 +43,58 @@ We can use the link [http://34.77.37.110/restricted-sessions/data/session_store.
   - 11l3ztdo96ritoitf9fr092ru3
   - ksjdlaskjd23ljd2lkjdkasdlk
   
-We still can't get access since a `UserInfo` is required. This gives us the flag finally.
+We still can't get access since a `UserInfo` is required, so we insert one eg `mary`. This gives us the flag finally.
 ![flag](images/restricted_session/flag.png)
 
-> flag : sessionareawesomebutifitsecure
+> **flag : sessionareawesomebutifitsecure**
 
 --------------------------------------------------------------------------------------------------------------
 
-# 
+# Challenge Name : Hide me
+
+Category : General Information
+
+Challenge Description : I act as a middle man to forward requests from different devices to access external resources . I am a ......?
+
+> flag : proxy
+
+--------------------------------------------------------------------------------------------------------------
+
+# Challenge Name : Encoding
+
+Category : General Information
+
+Challenge Description : What type of this encoded , hashed text "aGVsbG93b3JsZDEx" ?
+
+> flag : base64
+
+-------------------------------------------------------------------------------------------------------------
+
+# Challenge Name : Cheers
+
+Category : Web Security
+
+Challenge Description : Go search for what cheers you up [http://ec2-54-93-122-202.eu-central-1.compute.amazonaws.com/ch33r5/](http://ec2-54-93-122-202.eu-central-1.compute.amazonaws.com/ch33r5/)
+
+#### Solution
+
+when we visit the link we find the following message:
+![message](images/cheers/link.png)
+
+From the error message the error is undefined index and it might take the parameter welcome. ie `/ch33r5/?welcome`.
+
+We can change the link to [http://ec2-54-93-122-202.eu-central-1.compute.amazonaws.com/ch33r5/?welcome](http://ec2-54-93-122-202.eu-central-1.compute.amazonaws.com/ch33r5/?welcome)
+
+This still gives us another error but with a closer hint....
+
+![message2](/images/cheers/link2_error.png)
+
+modify the link to `/ch33r5/?welcome&gimme_flag`
+
+[http://ec2-54-93-122-202.eu-central-1.compute.amazonaws.com/ch33r5/?welcome&gimme_flag](http://ec2-54-93-122-202.eu-central-1.compute.amazonaws.com/ch33r5/?welcome&gimme_flag)
+
+and we get the flag......
+
+awesome
+
+> flag : FLAG{k33p_c4lm_st4rt_c0d!ng}
