@@ -87,7 +87,7 @@ We can change the link to [http://ec2-54-93-122-202.eu-central-1.compute.amazona
 
 This still gives us another error but with a closer hint....
 
-![message2](/images/cheers/link2_error.png)
+![message2](images/cheers/link2_error.png)
 
 modify the link to `/ch33r5/?welcome&gimme_flag`
 
