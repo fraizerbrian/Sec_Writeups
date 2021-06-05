@@ -98,3 +98,23 @@ and we get the flag......
 awesome
 
 > flag : FLAG{k33p_c4lm_st4rt_c0d!ng}
+
+------------------------------------------------------------------------------------------------------------
+
+# Challenge Name : Contribute
+
+Category : General Information
+
+Challenge Description : I am an Organization that releases the Top 10 Vulnerabilities in Application Security . I am ……?
+
+> flag : OWASP
+
+------------------------------------------------------------------------------------------------------------
+
+# Challenge Name : one click
+
+Category : General Information
+
+Challenge Description : a type of malicious exploit of a website where unauthorized commands are submitted from a user that the web application trusts .
+
+> flag : CSRF
