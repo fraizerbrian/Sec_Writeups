@@ -7,7 +7,7 @@ Contains several tools targeted towards various information security fields.
 ## Linux File System
 Below is a sample of the hierarchy of the file system used on linux machines.
 
-![Linux file system](linuxFiles.jpg)
+![Linux file system](images/linuxFiles.jpg)
 
 | Directory | Description |
 | ------- | ---------- |

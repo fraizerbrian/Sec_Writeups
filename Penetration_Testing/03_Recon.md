@@ -70,5 +70,10 @@ Is an OSINT tool that gathers information such as emails, names, hosts, subdomai
 
 [OSINT Framework](https://osintframework.com/) is a big collection of OSINT tools or resources.
 
-### 2. Active Recon
+### 2. `Active Recon`
 Involves direct interaction with the target.
+
+
+---------------------------------------
+## Writeups
+
