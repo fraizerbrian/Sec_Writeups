@@ -10,7 +10,7 @@ Below is a sample of the hierarchy of the file system used on linux machines.
 ![Linux file system](linuxFiles.jpg)
 
 | Directory | Description |
-| :-------: | :----------: |
+| ------- | ---------- |
 | / | The root directory |
 | /bin/ | Essential user command binaries |
 | /boot/ | Linux kernel and other static files of the boot loader |
@@ -30,7 +30,6 @@ Below is a sample of the hierarchy of the file system used on linux machines.
 | /tmp/ | temporary files(deleted when the system is restarted) |
 | /usr/ | applications and files used by users |
 | /var/ | variable data files handled by services such as logs, queues, caches and spools |
-|-----------------------|------------------------------------------------------|
 
 Linux command line general form:
 ```
