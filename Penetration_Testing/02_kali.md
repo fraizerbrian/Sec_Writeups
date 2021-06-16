@@ -78,7 +78,6 @@ rmdir - remove empty directories
 | passwd | change user password |
 | chmod | modify the permission types for files and directories. |
 | chown | change the owner and the group of files and directories. |
-|-------|-------------------|
 
 ### Permissions
 There are 3 types of permissions:
