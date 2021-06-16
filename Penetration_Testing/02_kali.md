@@ -68,7 +68,7 @@ rmdir - remove empty directories
 
 ### Users and groups
 | Command  | Description |
-| :-----:  | :---------: |
+| -----  | --------- |
 | id | find out user and group names and numeric IDs of the current user or any other user. |
 | whoami | displays the username of the current user. |
 | adduser | add a user to the system. |
