@@ -474,7 +474,7 @@ flag{s1mple_linux_101}
 ## Challenge #2
 Challenge Name : remove
 
-Category : General Information
+Challenge Category : General Information
 
 Challenge Description : I need to remove a file called secret in my home directory. which command should i use 
 

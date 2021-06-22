@@ -77,3 +77,82 @@ Involves direct interaction with the target.
 ---------------------------------------
 ## Writeups
 
+#### Challenge #1
+Challenge Name : version
+
+Challenge Category : Machines
+
+Challenge Description : This Challenge will help you understand to define the version of the web service
+
+Can you find the web server version
+
+Flag format Xxxxxxy.y.yy
+
+Target IP: 35.156.4.248
+
+**Solution**
+
+This challenge requires us to make use of nmap.
+
+First let's find any open or available ports.
+```
+┌──(fraize㉿fraize)-[~]
+└─$ nmap 35.156.4.248 -Pn
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-22 13:40 EAT
+Nmap scan report for ec2-35-156-4-248.eu-central-1.compute.amazonaws.com (35.156.4.248)
+Host is up (0.18s latency).
+Not shown: 998 filtered ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 16.00 seconds
+                                                           
+```
+
+Ports 22 and 80 are open but since we need the web version we use port 80 and use (-sV) argument which is the version detection.
+```
+┌──(fraize㉿fraize)-[~]
+└─$ nmap 35.156.4.248 -Pn -p 80 -sV 
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-22 13:42 EAT
+Nmap scan report for ec2-35-156-4-248.eu-central-1.compute.amazonaws.com (35.156.4.248)
+Host is up (0.18s latency).
+
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 9.56 seconds
+```
+
+> flag : Apache2.4.29
+
+
+#### Challenge #2
+Challenge Name : Invincible
+
+Challenge Category : Open Source Cyber Intelligence
+
+Challenge Description : This Challenge will help you understand the basics of OSINT
+
+Our threat intelligence team has noticed suspicious behavior from the user "soremanzo" , Can you trace him and find what he is trying to hide.
+
+**Solution**
+
+From the description, the goal is to track **soremanzo**. First off, let's do a name search on the user using [NameCheckup](https://namecheckup.com/)
+![NCuser](images/recon1.png)
+
+Here we get that the name is taken on Facebook and Disqus. Facebook leads to a dead end whereas Disqus gives us a clue.
+
+![disqus soremanzo](images/recon2.png)
+
+Next, we get to use a tool called **wayback machine** which will give us any history from soremanzo's disqus.
+
+This gives use a calender which has the days and which month and year that soremanzo had activity in the disqus account. One of them gives us the flag.
+
+![disqus activity calender](images/recon3.png)
+![flag](images/recon4.png)
+
+> flag : FLAG{4rch1v3_Usu4LLy_C0nt41n_Us3fuL_1nf0rm4t10n}
