@@ -84,25 +84,25 @@ To print every packet that Nmap sends and receives, use the --packet-trace optio
 
 2. **Specifying multiple targets**
 
-Using **CIDR notation**, eg to scan all 256 addresses beginn with eg `nmap 10.1.1.0/24`.
+Using **CIDR notation**, eg to scan all 256 addresses beginn with eg =>  `nmap 10.1.1.0/24`.
 
-Using the **dash**, eg to scan 10.1.50.1, 10.1.51.1 and 10.1.52.1 use `nmap 10.1.50-52.1`.
+Using the **dash**, eg to scan 10.1.50.1, 10.1.51.1 and 10.1.52.1 use => `nmap 10.1.50-52.1`.
 
-Using **commas**, eg `nmap 10.1.50,51,52,57,59.1`.
+Using **commas**, => `nmap 10.1.50,51,52,57,59.1`.
 
-All combined, `nmap 10.1,2.50-52.1/30 10.1.1.1 10.1.1.2`
+All combined,=> `nmap 10.1,2.50-52.1/30 10.1.1.1 10.1.1.2`
 
 3. **List scan**
 
 The list scan option **(-sL)** is useful for making sure that correct addresses are specified before doing the real scan
 
-`nmap -sL 10.1,2.50-52.1/30 10.1.1.1 10.1.1.2`
+=> `nmap -sL 10.1,2.50-52.1/30 10.1.1.1 10.1.1.2`
 
 List scan prints the specified addresses without sending a single packet to the target.
 
 4. **Default Options**
 
-If you specify only an IP address or domain name and no other options eg `nmap 74.207.244.221`, Nmap performs the following;
+If you specify only an IP address or domain name and no other options => `nmap 74.207.244.221`, Nmap performs the following;
   - The IP address is reverse-DNS resolved to domain name, or viceversa in case a domain name is specified. Disabled by **-n**.
   - Ping scanning using TCP ACK:80 and ICMP. This is equivalent to **-PA -PE**. Disabled by **-PN**.
   - Scans the host(s)'s top 1000 most popular ports. When running as root, SYN stealth scan is used. When running as user, connect scan is used.
@@ -138,9 +138,9 @@ Nmap uses different kinds of ping packets when run with user or root privileges 
 ### Port scan with Nmap
 Nmap by default scans top 1000 most popular ports found in /etc/nmap/nmap-services.
 
-To specify a different number of common ports use `nmap --top-ports 1000 10.1.1.1`
+To specify a different number of common ports use => `nmap --top-ports 1000 10.1.1.1`
 
-To specify custom port numbers use **-p** ie, `nmap -p -25,135-137 10.1.1.1`
+To specify custom port numbers use **-p** => `nmap -p -25,135-137 10.1.1.1`
 
 **Scan types**
 | **Option** | **Port Scan Type** |
@@ -193,7 +193,7 @@ where
 ### Avoiding detection
 Simplest way to avoid PSD is to scan slowly.
 
-For default values, the following parameters would work `nmap --scan-delay 3.192.168.56.1`
+For default values, the following parameters would work => `nmap --scan-delay 3.192.168.56.1`
 
 PSD doesn't detect a request as a port scan when the ack or rst flags are set.
 
@@ -205,13 +205,66 @@ Nmap allows us to change the string eeaily by passing **-script-args http.userag
 ### Tips and Tricks.
 1. Limiting scan speed
 
+Nmap scans can be fast which in  turn can be counter-productive especially when you want to test your system's firewall without disabling any activated flood detection rules or when you want to run a long-term test for a specific port or service.
+
+To send a packet at most every 3.33 seconds => `nmap --max-rate 0.3 192.168.56.1`
+
+To a packet every 3.1 seconds user => `nmap --scan-delay 3.1 192.168.56.1`
+
+**specifying targets input from a list file**
+
+Nmap supports input from a list file bby passing (**-iL**):
+```
+addresses.txt
+10.1.1.1 10.1.1.2 10.1.1-10.3
+
+10.3.1.3 10.3.1.50 10.3.2.55
+
+10.1.1.100
+
+...
+```
+use => `nmap -iL addresses.txt`
+
+Addresses in the file must be separated with a whitespace.
+
+**Specifying targets to exclude from a scan**
+
+=> `nmap 10.1.1.1-10 --exclude 10.1.1.5,7`
+
+excluding from the same file => `nmap 10.1.1.1-10 --excludefile excludeaddr.txt`
+
 2. Spoofing
+
+To spoof source IP => `nmap -S 192.168.56.35 -e vboxnet0 192.168.56.11`
+
+To spoof the source MAC address => `nmap --spoof-mac 192.168.56.11`
+
+To spoof source port => `nmap --source-port 22 192.168.56.11`
 
 3. Speeding up the scan
 
+By default, Nmap performs DNS/reverse-DNS resolution on targets. To tell Nmap **n**ever do any DNS resolution, pass the (**-n**) option => `nmap -n 192.168.56.0/24`
+
 4. Scan port number 0
 
+By default, port 0 is skipped from scans, even if -p- is specified. To scan it, it must be specified explicitly ie => nmap -p- 0-65535.
+
+Port 0 is invalid in RFC standards, however it can be used by malware and the likes to avoid more naive port scanners.
+
 5. File output formats
+
+Nmap has built-in support for for file output alongside with terminal output => `-oN filename`
+
+Normal output, same as the terminal output => `oX filename`
+
+XML output, contains very detailed information about the scan, easy to parse with software => `oG filename`
+
+Grepable output, deprecated => `oA`
+
+All of the above combined. Creates files called sitename.nmap, sitename.xml and sitename.gnmap if no filename is specified.
+
+eg => `nmap -oN output.txt -oX output.xml scanme.nmap.org`
 
 --------------------------------------
 ## Writeups
@@ -229,4 +282,20 @@ flag md5(ports)
 
 **Solution**
 
+First off, lets carry an nmap scan and see the open ports
+```
+┌──(fraize㉿fraize)-[~]
+└─$ nmap -Pn 35.156.4.248         
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-23 13:02 EAT
+Nmap scan report for ec2-35-156-4-248.eu-central-1.compute.amazonaws.com (35.156.4.248)
+Host is up (0.17s latency).
+Not shown: 998 filtered ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 13.58 seconds
+
+```
 
