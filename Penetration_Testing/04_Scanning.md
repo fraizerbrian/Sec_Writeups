@@ -299,3 +299,7 @@ Nmap done: 1 IP address (1 host up) scanned in 13.58 seconds
 
 ```
 
+We get 2 ports which are open, but that's not the flag. So lets convert to md5 and we get the flag.
+
+> flag: c81e728d9d4c2f636f067f89cc14862c
+
