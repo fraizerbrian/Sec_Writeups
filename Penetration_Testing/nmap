@@ -1,0 +1,17 @@
+# Nmap 7.91 scan initiated Sat Jul 10 14:06:08 2021 as: nmap -sV -sC -oN nmap 35.156.4.248
+Nmap scan report for ec2-35-156-4-248.eu-central-1.compute.amazonaws.com (35.156.4.248)
+Host is up (0.17s latency).
+Not shown: 998 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 4b:24:fc:36:53:c8:0b:f7:8c:31:7a:28:dd:c9:34:02 (RSA)
+|   256 6c:6e:61:94:2f:fd:f6:d2:dc:25:e3:4f:32:ac:33:15 (ECDSA)
+|_  256 ce:d7:0b:19:cb:32:3b:d4:f1:bf:f7:74:8a:52:d5:bc (ED25519)
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Jul 10 14:06:32 2021 -- 1 IP address (1 host up) scanned in 24.66 seconds

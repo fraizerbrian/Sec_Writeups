@@ -61,6 +61,42 @@ Put backdoor on a webserver, either in separate file or in hidden in another fil
 
 Add an admin account to CMS.
 
-8. **Mysql-backdoor**
+8. **Mysql-backdoor** (using User Defined Functions UDF)
 
-[https://pure.security/simple-mysql-backdoor-using-user-defined-functions/ ](https://pure.security/simple-mysql-backdoor-using-user-defined-functions/ )
+UDF is a way to extend MySQL with a new function that works like a built-in MySQL; you write a library, put it into a system directory then create the function in MySQL.
+
+**Creating the code**
+
+For each function you would like to include in MySQL, 3 functions are written:
+
+  1. _The Constructor_ : FunctionName_init( UDF_INIT*, UDF_ARGS*,char*);
+  2. _The destructor_ : FunctionName_deinit(UDF_INIT*);
+  3. _The main function_ : FunctionName( UDF_INIT*, UDF_ARGS*,char*,unsigned long*, char*, char*);
+  
+_The constructor_ is initialization code that will be executed **before** the _main function_, and is where you should perform input validation, allocate necessary memory, perform other setup tasks etc.
+
+_The destructor_ is executed after your function and is where any cleanup instructions should be placed.
+
+---------------------------
+# writeup
+
+###### Challenge Name : **Remote**
+
+Challenge Category : Persistence
+
+Challenge Level : easy
+
+Challenge Description : You want to achieve persistence using Meterpreter’s persistence module by creating an autorun registry file and getting a shell automatically every time the user restarts the PC
+
+Persistence options 
+
+    Minutes after restarting the system: 7 
+    Your Local port: 1337
+    Your local host IP: 192.168.0.177
+
+Flag format is: xxx xxxxxxx/xxxxx/xxxxxxxx xxxxx_xxxx=xxx  xxxxx=xxxx xxxxx=xxx.xxx.x.xxx
+
+**Solution**
+
+> flag :
+

