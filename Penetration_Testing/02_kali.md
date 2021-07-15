@@ -478,7 +478,7 @@ Challenge Category : General Information
 
 Challenge Description : I need to remove a file called secret in my home directory. which command should i use 
 
-> flag : 
+> flag : rm ~/secret
 
 ## Challenge #3
 Challenge Name : Distribution
