@@ -250,6 +250,7 @@ This step is used to gather the following information:
   ![sparta](images/sparta2.png)
   
   7. **[DMitry](https://github.com/jaygreig86/dmitry)** - Is a command line tool used to gather information about a host. It removes multiple commands. This tool performs whois search; retrieves attainable uptime information; system and server information; performs a SubDomain search, Email address search on a target host, tcp Port scan on host target.
+  
   ![dmitry](images/dmitry.png)
   
   8. **[Devploit](https://github.com/GhettoCole/Devploit)** -Is a tool used for information gathering. It performs Whois lookup, Geo-IP lookup, subnet lookup, port scanner, Extract links, Zone transfer, HTTP header, Host finder, IP-locator, Traceroute, Host DNS finder, Reverse IP lookup, Subdomain finder.
