@@ -195,4 +195,6 @@ The `-s` switch determines the type of scan to perform.
 | Update the Script Database | `nmap --script-updatedb` |
 
 
-Nmap Practice room [https://tryhackme.com/room/furthernmap](https://tryhackme.com/room/furthernmap)
+Nmap Practice [https://tryhackme.com/room/furthernmap](https://tryhackme.com/room/furthernmap)
+
+
