@@ -33,17 +33,18 @@ The `-s` switch determines the type of scan to perform.
 | Nmap Switch | Description |
 |-------------|-------------|
 | -sA | ACK scan |
-| -sF | FIN scan |
+| -sF | TCP FIN scan |
 | -sI | IDLE scan |
 | -sL | DNS scan/list scan |
-| -sN |	NULL scan |
+| -sN |	TCP NULL scan |
 | -sO |	Protocol scan |
 | -sP |	Ping scan |
 | -sR |	RPC scan |
-| -sS |	SYN scan |
+| -sS |	SYN "Half-open" scan |
 | -sT |	TCP connect scan |
 | -sW |	Windows scan |
-| -sX |	XMAS scan |
+| -sX |	TCP XMAS scan |
+| -sU | UDP Scans |
 
 #### Types of scans
 | Scan Type | nmap command |
