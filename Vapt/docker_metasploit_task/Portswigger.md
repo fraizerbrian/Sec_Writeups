@@ -1,6 +1,5 @@
 # Portswigger writeup
 
-**PortSwigger**
 - [ ] **Server Side Attacks**
 	- [ ] SQL injection 
 	- [ ] Authentication
@@ -29,7 +28,7 @@
 
 -----------------------------------------------------------------------------------------
 
-### SQL Injection
+## SQL Injection
 
 > SQL injection is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database.
 
@@ -46,12 +45,11 @@ An attacker can escalate an SQL injection attack to compromise the underlying se
 3. **Out-of band SQLi** - Depends on features being enabled on the database server being used by the web app and Occurs when an attacker is unable to use the same channel to launch the attack and gather results.
 
 **Detecting SQL injection vulnerabilities**
-
-    1. Submitting the single quote character ' and looking for errors or other anomalies.
-    2. Submitting some SQL-specific syntax that evaluates to the base value of the entry point and to a different value.
-    3. Submitting Boolean conditions such as  "OR 1=1" and "OR 1=2" and looking for differences in the application's responses.
-    4. Submitting payloads designed to trigger time delays when executed wuthin an SQL query, and looking for differences in the time taken to respond.
-    5. Submitting OAST payloads designed to trigger an out-of-band network interaction when executed within an SQL query, and monitoring for any resulting interactions.
+1. Submitting the single quote character ' and looking for errors or other anomalies.
+2. Submitting some SQL-specific syntax that evaluates to the base value of the entry point and to a different value.
+3. Submitting Boolean conditions such as  "OR 1=1" and "OR 1=2" and looking for differences in the application's responses.
+4. Submitting payloads designed to trigger time delays when executed wuthin an SQL query, and looking for differences in the time taken to respond.
+5. Submitting OAST payloads designed to trigger an out-of-band network interaction when executed within an SQL query, and monitoring for any resulting interactions.
 
 **SQL injection in different parts of the query**
 1. In *UPDATE* statements within the updated vales or the WHERE clause.
@@ -61,7 +59,7 @@ An attacker can escalate an SQL injection attack to compromise the underlying se
 
 
 
-**Lab: SQL injection UNION attack, determining the number of columns returned by the query**
+### **Lab: SQL injection UNION attack, determining the number of columns returned by the query**
 
 [https://portswigger.net/web-security/sql-injection/union-attacks/lab-determine-number-of-columns](https://portswigger.net/web-security/sql-injection/union-attacks/lab-determine-number-of-columns)
 
@@ -69,37 +67,44 @@ This lab contains an SQL injection vulnerability in the product category filter.
 
 To solve the lab, determine the number of columns returned by the query by performing an SQL injection UNION attack that returns an additional row containing null values. 
 
-**Lab: SQL injection UNION attack finding a column containing text**
+> Solution :
 
-**Lab: SQL injection UNION attack, retrieving data from other tables**
 
-**Lab: SQL injection UNION attack, retrieving multiple values in a single column**
 
-**Lab: SQL injection attack, querying the database type and version on Oracle**
+### **Lab: SQL injection UNION attack finding a column containing text**
 
-**Lab: SQL injection attack, querying the database type and version on MySQL and Microsoft**
+### **Lab: SQL injection UNION attack, retrieving data from other tables**
 
-**Lab: SQL injection attack, listing the database contents on non-Oracle databases**
+### **Lab: SQL injection UNION attack, retrieving multiple values in a single column**
 
-**Lab: SQL injection attack, listing the database contents on Oracle**
+### **Lab: SQL injection attack, querying the database type and version on Oracle**
 
-**Lab: Blind SQL injection with conditional responses**
+### **Lab: SQL injection attack, querying the database type and version on MySQL and Microsoft**
 
-**Lab: Blind SQL injection with conditional errors**
+### **Lab: SQL injection attack, listing the database contents on non-Oracle databases**
 
-**Lab: Blind SQL injection with time delays**
+### **Lab: SQL injection attack, listing the database contents on Oracle**
 
-**Lab: Blind SQL injection with time delays and information retrieval**
+### **Lab: Blind SQL injection with conditional responses**
 
-**Lab: Blind SQL injection with out-of-band interaction**
+### **Lab: Blind SQL injection with conditional errors**
 
-**Lab: Blind SQL injection with out-of-band data exfiltration**
+### **Lab: Blind SQL injection with time delays**
 
-**Lab: SQL injection vulnerability in WHERE clause allowing retrieval of hidden data**
+### **Lab: Blind SQL injection with time delays and information retrieval**
+
+### **Lab: Blind SQL injection with out-of-band interaction**
+
+### **Lab: Blind SQL injection with out-of-band data exfiltration**
+
+### **Lab: SQL injection vulnerability in WHERE clause allowing retrieval of hidden data**
+
 [https://portswigger.net/web-security/sql-injection/lab-retrieve-hidden-data](https://portswigger.net/web-security/sql-injection/lab-retrieve-hidden-data)
 
 > Solution :
+![](images/sqli/lab1a.png)
 
+![](images/sqli/lab1b.png)
 - When a gift category is selected in the page, eg tech gifts, link would be: `https://ac371f081e4fc1da80be130e00960029.web-security-academy.net/filter?category=Tech+gifts`
 - The SQL query to retrieve the info would be: `SELECT * FROM products WHERE category = 'Tech gifts' AND released = 1`
 - Adding a single quote at the end of the query string would result to the following: `?category=Tech+gifts'`
