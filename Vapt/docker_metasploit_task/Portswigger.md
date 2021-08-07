@@ -54,11 +54,10 @@ An attacker can escalate an SQL injection attack to compromise the underlying se
     5. Submitting OAST payloads designed to trigger an out-of-band network interaction when executed within an SQL query, and monitoring for any resulting interactions.
 
 **SQL injection in different parts of the query**
-
- 		1. In *UPDATE* statements within the updated vales or the WHERE clause.
-    2. In *INSERT* statements within the inserted values.
-    3. In *SELECT* statements within the table or column name.
-    4. In *SELECT* statements within the ORDER BY clause.
+1. In *UPDATE* statements within the updated vales or the WHERE clause.
+2. In *INSERT* statements within the inserted values.
+3. In *SELECT* statements within the table or column name.
+4. In *SELECT* statements within the ORDER BY clause.
 
 
 
