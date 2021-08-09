@@ -59,7 +59,7 @@ An attacker can escalate an SQL injection attack to compromise the underlying se
 
 
 
-### **Lab: SQL injection UNION attack, determining the number of columns returned by the query**
+### **Lab 1: SQL injection UNION attack, determining the number of columns returned by the query**
 
 [https://portswigger.net/web-security/sql-injection/union-attacks/lab-determine-number-of-columns](https://portswigger.net/web-security/sql-injection/union-attacks/lab-determine-number-of-columns)
 
@@ -69,35 +69,112 @@ To solve the lab, determine the number of columns returned by the query by perfo
 
 > Solution :
 
+A UNION operator concatenates the results of two queries into a single result set.
 
+Basic Rules for combining results of two queries by using UNION according to [microsoft](https://docs.microsoft.com/en-us/sql/t-sql/language-elements/set-operators-union-transact-sql?view=sql-server-ver15): 
 
-### **Lab: SQL injection UNION attack finding a column containing text**
+1. The number and the order of the columns must be the same in all queries.
+2. The data types must be compatible.
 
-### **Lab: SQL injection UNION attack, retrieving data from other tables**
+_ORDER BY_ sorts data returned by a query in sql Server. This clause, according to [microsoft]() us used to:
 
-### **Lab: SQL injection UNION attack, retrieving multiple values in a single column**
+1. Order the result set of a query by the specified column list and limit the rows returned to a specified range.
+2. Determine the order in which ranking function values are applied to the result set.
 
-### **Lab: SQL injection attack, querying the database type and version on Oracle**
+To identify whether the page is prone to SQLi, I can introduce a character to the link such as `'` eg [https://ac511f871e48758f808d4a0e000f0051.web-security-academy.net/filter?category=Clothing%2c+shoes+and+accessories' ](https://ac511f871e48758f808d4a0e000f0051.web-security-academy.net/filter?category=Clothing%2c+shoes+and+accessories' )
 
-### **Lab: SQL injection attack, querying the database type and version on MySQL and Microsoft**
+I get an internal server error hence is susceptible to an SQLi attack.
+![](images/sqli/lab1c.png)
 
-### **Lab: SQL injection attack, listing the database contents on non-Oracle databases**
+I can input a correct character such as `'--` and I have a successful input.
 
-### **Lab: SQL injection attack, listing the database contents on Oracle**
+I can check the number of columns using `' UNION select NULL--` whereby NULL represents the number of columns. 
 
-### **Lab: Blind SQL injection with conditional responses**
+This leads to an internal server error, hence there could be more than one column.
 
-### **Lab: Blind SQL injection with conditional errors**
+I continue to increase the `NULL` value until the page loads successfully on the third NUL value without breaking.
 
-### **Lab: Blind SQL injection with time delays**
+![](images/sqli/lab1d.png)
 
-### **Lab: Blind SQL injection with time delays and information retrieval**
+### **Lab 2: SQL injection UNION attack finding a column containing text**
 
-### **Lab: Blind SQL injection with out-of-band interaction**
+[https://portswigger.net/web-security/sql-injection/union-attacks/lab-find-column-containing-text](https://portswigger.net/web-security/sql-injection/union-attacks/lab-find-column-containing-text)
 
-### **Lab: Blind SQL injection with out-of-band data exfiltration**
+This lab contains an SQL injection vulnerability in the product category filter. The results from the query are returned in the application's response, so you can use a UNION attack to retrieve data from other tables. To construct such an attack, you first need to determine the number of columns returned by the query. You can do this using a technique you learned in a previous lab. The next step is to identify a column that is compatible with string data.
 
-### **Lab: SQL injection vulnerability in WHERE clause allowing retrieval of hidden data**
+The lab will provide a random value that you need to make appear within the query results. To solve the lab, perform an SQL injection UNION attack that returns an additional row containing the value provided. This technique helps you determine which columns are compatible with string data. 
+
+> Solution:
+
+First of, find the number of columns by using `'+UNION+select+NULL--` till I find the correct number of columns by the number of NULLS used.
+
+I get 3 columns present since I use `'+UNION+select+NULL+NULL+NULL--`
+![](images/sqli/lab2a.png)
+
+![](images/sqli/lab2b.png)
+
+![](images/sqli/lab2c.png)
+
+Since I am required to retrieve the text `'de6riv'`, I will be replacing the NULL value with the given text till the page does not crash.
+![](images/sqli/lab2d.png)
+![](images/sqli/lab2e.png)
+![](images/sqli/lab2f.png)
+
+The second column gives a successful load hence the column containing text.
+
+### **Lab 3: SQL injection UNION attack, retrieving data from other tables**
+[https://ac1a1fe71f751a9b817192a1004000b4.web-security-academy.net/](https://ac1a1fe71f751a9b817192a1004000b4.web-security-academy.net/)
+
+This lab contains an SQL injection vulnerability in the product category filter. The results from the query are returned in the application's response, so you can use a UNION attack to retrieve data from other tables. To construct such an attack, you need to combine some of the techniques you learned in previous labs.
+
+The database contains a different table called users, with columns called username and password.
+
+To solve the lab, perform an SQL injection UNION attack that retrieves all usernames and passwords, and use the information to log in as the administrator user. 
+
+> Solution:
+![](images/sqli/lab3.png)
+I'm going to first determine te number of columns available using the `UNION` method or `ORDER BY 1--`
+![](images/sqli/lab3a.png)
+
+There are 2 columns since when I add a third column I get an internal server error.
+
+Next up, confirm if the columns accept string values by using `'+UNION+select+'a',+NULL--`. This runs successfully hence first column accepts string values, next confirm the second column together with the first one using `'+UNION+select+'a',+'a--'`
+
+![](images/sqli/lab3b.png)
+![](images/sqli/lab3c.png)
+
+I want to retrieve the username and password so that i can be able to login using the administrator user, use `'+UNION+select+username,+password+FROM+users--`
+
+![](images/sqli/lab3d.png)
+![](images/sqli/lab3e.png)
+
+Use the Aministrator credentials to  log in 
+![](images/sqli/lab3f.png)
+![](images/sqli/lab3g.png)
+
+### **Lab 4: SQL injection UNION attack, retrieving multiple values in a single column**
+
+### **Lab 5: SQL injection attack, querying the database type and version on Oracle**
+
+### **Lab 6: SQL injection attack, querying the database type and version on MySQL and Microsoft**
+
+### **Lab 7: SQL injection attack, listing the database contents on non-Oracle databases**
+
+### **Lab 8: SQL injection attack, listing the database contents on Oracle**
+
+### **Lab 9: Blind SQL injection with conditional responses**
+
+### **Lab 10: Blind SQL injection with conditional errors**
+
+### **Lab 11: Blind SQL injection with time delays**
+
+### **Lab 12: Blind SQL injection with time delays and information retrieval**
+
+### **Lab 13: Blind SQL injection with out-of-band interaction**
+
+### **Lab 14: Blind SQL injection with out-of-band data exfiltration**
+
+### **Lab 15: SQL injection vulnerability in WHERE clause allowing retrieval of hidden data**
 
 [https://portswigger.net/web-security/sql-injection/lab-retrieve-hidden-data](https://portswigger.net/web-security/sql-injection/lab-retrieve-hidden-data)
 
@@ -105,15 +182,24 @@ To solve the lab, determine the number of columns returned by the query by perfo
 ![](images/sqli/lab1a.png)
 
 ![](images/sqli/lab1b.png)
-- When a gift category is selected in the page, eg tech gifts, link would be: `https://ac371f081e4fc1da80be130e00960029.web-security-academy.net/filter?category=Tech+gifts`
-- The SQL query to retrieve the info would be: `SELECT * FROM products WHERE category = 'Tech gifts' AND released = 1`
-- Adding a single quote at the end of the query string would result to the following: `?category=Tech+gifts'`
-- In the SQL query: `SELECT * FROM products WHERE category = 'Tech gifts'' AND released = 1`
-- This will cause an error as there is one single quote that is not closed
-- Adding double dash after the quote "--": `?category=Tech+gifts'-- `
-- In the query string: `SELECT * FROM products WHERE category = 'Tech gifts'--' AND released = 1 `
-- This would result in showing in all products of category, Tech gifts both released and unreleased would be shown.
-- To fully show everything in the database:
+
+When a gift category is selected in the page, eg tech gifts, link would be: `https://ac371f081e4fc1da80be130e00960029.web-security-academy.net/filter?category=Tech+gifts`
+
+The SQL query to retrieve the info would be: `SELECT * FROM products WHERE category = 'Tech gifts' AND released = 1`
+
+Adding a single quote at the end of the query string would result to the following: `?category=Tech+gifts'`
+
+In the SQL query: `SELECT * FROM products WHERE category = 'Tech gifts'' AND released = 1`
+
+This will cause an error as there is one single quote that is not closed
+
+Adding double dash after the quote "--": `?category=Tech+gifts'-- `
+
+In the query string: `SELECT * FROM products WHERE category = 'Tech gifts'--' AND released = 1 `
+
+This would result in showing in all products of category, Tech gifts both released and unreleased would be shown.
+
+To fully show everything in the database:
 ```
 ?category=Tech+gifts' or 1=1-- 
 SELECT * FROM products WHERE category = 'Tech gifts' or 1=1--' AND released = 1 
