@@ -34,6 +34,8 @@
 
 An attacker can escalate an SQL injection attack to compromise the underlying server or other back-end infrastructure, or perform a denial-of-service attack.
 
+[SQLi cheat sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet)
+
 **Types Of SQLi**
 
 1. **In-band SQLi (Classic SQLi)** - Occurs when an attacker is able to use the same communication channel to both launch the attack and gather results.
@@ -67,7 +69,7 @@ This lab contains an SQL injection vulnerability in the product category filter.
 
 To solve the lab, determine the number of columns returned by the query by performing an SQL injection UNION attack that returns an additional row containing null values. 
 
-> Solution :
+> **Solution** :
 
 A UNION operator concatenates the results of two queries into a single result set.
 
@@ -104,7 +106,7 @@ This lab contains an SQL injection vulnerability in the product category filter.
 
 The lab will provide a random value that you need to make appear within the query results. To solve the lab, perform an SQL injection UNION attack that returns an additional row containing the value provided. This technique helps you determine which columns are compatible with string data. 
 
-> Solution:
+> **Solution**:
 
 First of, find the number of columns by using `'+UNION+select+NULL--` till I find the correct number of columns by the number of NULLS used.
 
@@ -131,7 +133,8 @@ The database contains a different table called users, with columns called userna
 
 To solve the lab, perform an SQL injection UNION attack that retrieves all usernames and passwords, and use the information to log in as the administrator user. 
 
-> Solution:
+> **Solution**:
+
 ![](images/sqli/lab3.png)
 I'm going to first determine te number of columns available using the `UNION` method or `ORDER BY 1--`
 ![](images/sqli/lab3a.png)
@@ -153,6 +156,59 @@ Use the Aministrator credentials to  log in
 ![](images/sqli/lab3g.png)
 
 ### **Lab 4: SQL injection UNION attack, retrieving multiple values in a single column**
+
+[https://portswigger.net/web-security/sql-injection/union-attacks/lab-retrieve-multiple-values-in-single-column](https://portswigger.net/web-security/sql-injection/union-attacks/lab-retrieve-multiple-values-in-single-column)
+
+This lab contains an SQL injection vulnerability in the product category filter. The results from the query are returned in the application's response so you can use a UNION attack to retrieve data from other tables.
+
+The database contains a different table called users, with columns called username and password.
+
+To solve the lab, perform an SQL injection UNION attack that retrieves all usernames and passwords, and use the information to log in as the administrator user. 
+
+> **Solution**
+
+![](images/sqli/lab4.png)
+
+Confirm the number of columns available using the `' ORDER BY 1--`  method.
+
+![](images/sqli/lab4a.png)
+
+There are 2 columns from the above.
+
+Next up, confirm which column accepts strings;
+![](images/sqli/lab4b.png)
+
+The second column accepts string values whereas the first column sends an internal server error.
+
+Next up is retrieving values from the column, which I can try by using `' UNION select NULL, username from users` to extract the username.
+
+![](images/sqli/lab4c.png)
+
+I successfully get 3 usernames.
+
+Let's now extract both the username and password from the column by concatenating the strings together [SQL injection cheat sheet](https://portswigger.net/web-security/sql-injection/union-attacks)
+
+To identify how to concatenate, check the SQL version being run by using the following
+
+| SQL Version | SQL Query method | String Concatenation 
+-------|-------------------------------|----------------
+Oracle | SELECT banner FROM v$version		| 'foo'||'bar' 
+			 | SELECT version FROM v$instance	|
+-------|--------------------------------|-----------------
+Microsoft | SELECT @@version | 'foo'+'bar'
+----------|----------------------------- | ----------------
+PostgreSQL | SELECT version() | 'foo'||'bar'
+-----------|----------------------------|------------------
+MySQL | SELECT @@version | 'foo' 'bar' or CONCAT('foo','bar')
+
+The version is PostgreSQL 11.12 as seen hence will use the PostgreSQL concatenation method.
+![](images/sqli/lab4d.png)
+
+Hence to retrieve the username and password from the column I will use, `' UNION select NULL, username || password from users--`
+
+From running this I get the usernames and passwords but the requirement is to login using the administrator details.
+![](images/sqli/lab4e.png)
+![](images/sqli/lab4f.png)
 
 ### **Lab 5: SQL injection attack, querying the database type and version on Oracle**
 
