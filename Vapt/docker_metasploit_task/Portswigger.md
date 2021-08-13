@@ -46,7 +46,23 @@ An attacker can escalate an SQL injection attack to compromise the underlying se
 	2. `Time-based Blind SQLi` - Relies on sending an SQL query to the database which forces the database to wait for a specified amount of time before responding. Response time will indicate to the attacker whether the result of the query is TRUE or FALSE.
 3. **Out-of band SQLi** - Depends on features being enabled on the database server being used by the web app and Occurs when an attacker is unable to use the same channel to launch the attack and gather results.
 
+**Examples of SQL injection**
+
+1. **Retrieving hidden data** by modifying an SQ query to return additional results.
+2. **Subverting application logic** where one can change a query to interfere with the application's logic.
+3. **UNION attacks** where one can retrieve data from different database tables.
+4. **Examining the database** where one can extract information about the version and structure of the database.
+5. **Blind SQL injection** where the results of a query you control are not returned in the application's responses.
+
+**Blind SQL injection vulnerabilities**
+
+Depending on the nature of the vulnerability and the database involved, the following techniques can be used to exploit blind SQL injection.
+
+1. One can change the logic of the query to trigger a detectable difference in the application's response depending on the truth of a single condition. This might involve injecting a new condition into some Boolean logic or conditionally triggering an error such as divide-by-zero(1/0)
+2. One can conditionally trigger a time delay in the processing of the query allowing one to infer the truth of the condition based on the time 
+
 **Detecting SQL injection vulnerabilities**
+
 1. Submitting the single quote character ' and looking for errors or other anomalies.
 2. Submitting some SQL-specific syntax that evaluates to the base value of the entry point and to a different value.
 3. Submitting Boolean conditions such as  "OR 1=1" and "OR 1=2" and looking for differences in the application's responses.
@@ -54,6 +70,7 @@ An attacker can escalate an SQL injection attack to compromise the underlying se
 5. Submitting OAST payloads designed to trigger an out-of-band network interaction when executed within an SQL query, and monitoring for any resulting interactions.
 
 **SQL injection in different parts of the query**
+
 1. In *UPDATE* statements within the updated vales or the WHERE clause.
 2. In *INSERT* statements within the inserted values.
 3. In *SELECT* statements within the table or column name.
@@ -291,7 +308,7 @@ I can use the following method substring to find the first character of the pass
 
 ![](images/sqli/lab9h.png)
 
-The first charachter is **d**, having to go through the passwords one by one till the 20th character manually can be tidious hence I used a cluster bomb attack and set the positions at set positions and the payload set 1 would be numbers from 1 to 20 and payload set 2 would be bruteforcer then start the attack.
+The first charachter is **8**, having to go through the passwords one by one till the 20th character manually can be tidious hence I used a cluster bomb attack and set the positions at set positions and the payload set 1 would be numbers from 1 to 20 and payload set 2 would be bruteforcer then start the attack.
 
 ![](images/sqli/lab9i.png)
 ![](images/sqli/lab9j.png)
@@ -311,8 +328,53 @@ To solve the lab, log in as the administrator user.
 > **Solution**
 ![](images/sqli/lab10.png)
 
+I'll inject some code in the tracking Id and see if it passes or brings back an error.
+![](images/sqli/lab10a.png)
+
+An internal server error is brought back.
+
+Next up is exploiting the page to get conditional errors.
+![](images/sqli/lab10c.png)
+![](images/sqli/lab10d.png)
+
+In the first instance, there is an error recieved because the condition from the expression that contains a divide-by-zero `1/0` causes an error and hence is true. In the second instance, there is no error recieved because it is false.
+
+Next up is checking whether the username `administrator` exists.
+![](images/sqli/lab10e.png)
+
+This brings up an error confirming that the user does exist.
+
+Next is confirm the password of the user and how many characters are present in the password by using burp intruder.
+
+![](images/sqli/lab10f.png)
+![](images/sqli/lab10g.png)
+
+The password is 20 characters long hence can find the entire password by using burp intruder and substring.
+
+The first character of the password is `s`.
+![](images/sqli/lab10h.png)
+![](images/sqli/lab10i.png)
+
+The entire password can be found by using a similar method but using a cluster bomb attack to find the entire password and the characters using 
+```
+'||(SELECT+case+when+substr(password,§1§,1)='§a§'+then+to_char(1/0)+else+''+end+from+users+where+username%3d'administrator')||
+```
+![](images/sqli/lab10j.png)
+
+After running the bruteforce on the characters I get the characters and their positions.
+![](images/sqli/lab10k.png)
 
 ### **Lab 11: Blind SQL injection with time delays**
+
+This lab contains a blind SQL injection vulnerability. The application uses a tracking cookie for analytics, and performs an SQL query containing the value of the submitted cookie.
+
+The results of the SQL query are not returned, and the application does not respond any differently based on whether the query returns any rows or causes an error. However, since the query is executed synchronously, it is possible to trigger conditional time delays to infer information.
+
+To solve the lab, exploit the SQL injection vulnerability to cause a 10 second delay. 
+
+> **Solution**
+
+![](images/sqli/lab11b.png)
 
 ### **Lab 12: Blind SQL injection with time delays and information retrieval**
 
@@ -351,5 +413,5 @@ To fully show everything in the database:
 SELECT * FROM products WHERE category = 'Tech gifts' or 1=1--' AND released = 1 
 ```
 
-**Lab: SQL injection vulnerability allowing login bypass**
+### **Lab 16: SQL injection vulnerability allowing login bypass**
 
