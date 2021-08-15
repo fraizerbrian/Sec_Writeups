@@ -249,6 +249,8 @@ Being an oracle database, I'll use `'+UNION+SELECT+banner,+NULL+FROM+v$version--
 
 ### **Lab 9: Blind SQL injection with conditional responses**
 
+[https://portswigger.net/web-security/sql-injection/blind/lab-conditional-responses](https://portswigger.net/web-security/sql-injection/blind/lab-conditional-responses)
+
 This lab contains a blind SQL injection vulnerability. The application uses a tracking cookie for analytics, and performs an SQL query containing the value of the submitted cookie.
 
 The results of the SQL query are not returned, and no error messages are displayed. But the application includes a "Welcome back" message in the page if the query returns any rows.
@@ -308,10 +310,11 @@ I can use the following method substring to find the first character of the pass
 
 ![](images/sqli/lab9h.png)
 
-The first charachter is **8**, having to go through the passwords one by one till the 20th character manually can be tidious hence I used a cluster bomb attack and set the positions at set positions and the payload set 1 would be numbers from 1 to 20 and payload set 2 would be bruteforcer then start the attack.
+Having to go through the passwords one by one till the 20th character manually can be tidious hence I used a cluster bomb attack and set the positions at set positions and the payload set 1 would be numbers from 1 to 20 and payload set 2 would be bruteforcer then start the attack.
 
-![](images/sqli/lab9i.png)
+![](images/sqli/lab9z.png)
 ![](images/sqli/lab9j.png)
+
 
 ### **Lab 10: Blind SQL injection with conditional errors**
 
@@ -366,6 +369,8 @@ After running the bruteforce on the characters I get the characters and their po
 
 ### **Lab 11: Blind SQL injection with time delays**
 
+[https://portswigger.net/web-security/sql-injection/blind/lab-time-delays](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays)
+
 This lab contains a blind SQL injection vulnerability. The application uses a tracking cookie for analytics, and performs an SQL query containing the value of the submitted cookie.
 
 The results of the SQL query are not returned, and the application does not respond any differently based on whether the query returns any rows or causes an error. However, since the query is executed synchronously, it is possible to trigger conditional time delays to infer information.
@@ -378,9 +383,75 @@ To solve the lab, exploit the SQL injection vulnerability to cause a 10 second d
 
 ### **Lab 12: Blind SQL injection with time delays and information retrieval**
 
+[https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval)
+
+This lab contains a blind SQL injection vulnerability. The application uses a tracking cookie for analytics, and performs an SQL query containing the value of the submitted cookie.
+
+The results of the SQL query are not returned, and the application does not respond any differently based on whether the query returns any rows or causes an error. However, since the query is executed synchronously, it is possible to trigger conditional time delays to infer information.
+
+The database contains a different table called users, with columns called username and password. You need to exploit the blind SQL injection vulnerability to find out the password of the administrator user.
+
+To solve the lab, log in as the administrator user. 
+
+> **Solution**
+
+![](images/sqli/lab12.png)
+
+Confirm that there is the vulnerability by creating a delay ` || (select pg_sleep(10))--`
+
+Next up I can confirm that the users table does exist, if it does then the page delays by 10 seconds, if it doesnt then the page doesnt delay.  ` || (select case when (username='administrator') then pg_sleep(10) else pg_sleep(0) end from users)--`
+
+I can enumerate the password length using ` || (select case when (username='administrator' and length(password)>1) then pg_sleep(10) else pg_sleep(0) end from users)--`
+
+Send to intruder then automate by using the sniper attack.
+
+Set the resource pool to create new resource pool with the concurrent requests and set to 1
+
+Once the attack has run, click on columns then the response received, which gives the response recrived.
+
+The length of the password is 20 characters.
+
+Next enumerate the password, Find the first character by using bruteforcer ` || (select case when (username='administrator' and substring(password,1,1)='a' then pg_sleep(10) else pg_sleep(0) end from users)--`
+
 ### **Lab 13: Blind SQL injection with out-of-band interaction**
 
+[https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band)
+
+This lab contains a blind SQL injection vulnerability. The application uses a tracking cookie for analytics, and performs an SQL query containing the value of the submitted cookie.
+
+The SQL query is executed asynchronously and has no effect on the application's response. However, you can trigger out-of-band interactions with an external domain.
+
+To solve the lab, exploit the SQL injection vulnerability to cause a DNS lookup to Burp Collaborator. 
+
+> **Solution**
+
+[Burp Collaborator Client](https://portswigger.net/burp/documentation/desktop/tools/collaborator-clientBurp col)
+
+Modifying the Tracking ID and changing it to a payload that will trigger an interaction with the collaborator server and combining SQL injection with XXE techniques will exploit the lab.
+
+![](images/sqli/lab13a.png)
+![](images/sqli/lab13b.png)
+![](images/sqli/lab13c.png)
+
 ### **Lab 14: Blind SQL injection with out-of-band data exfiltration**
+
+[https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration)
+
+ This lab contains a blind SQL injection vulnerability. The application uses a tracking cookie for analytics, and performs an SQL query containing the value of the submitted cookie.
+
+The SQL query is executed asynchronously and has no effect on the application's response. However, you can trigger out-of-band interactions with an external domain.
+
+The database contains a different table called users, with columns called username and password. You need to exploit the blind SQL injection vulnerability to find out the password of the administrator user.
+
+To solve the lab, log in as the administrator user. 
+
+> **Solution**
+
+![](images/sqli/lab14.png)
+![](images/sqli/lab14a.png)
+![](images/sqli/lab14b.png)
+![](images/sqli/lab14d.png)
+
 
 ### **Lab 15: SQL injection vulnerability in WHERE clause allowing retrieval of hidden data**
 
