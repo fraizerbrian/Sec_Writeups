@@ -1,7 +1,7 @@
 # Portswigger writeup
 
 - [ ] **Server Side Attacks**
-	- [ ] SQL injection 
+	- [x] SQL injection 
 	- [ ] Authentication
 	- [ ] Directory Traversal
 	- [ ] Command Injection
