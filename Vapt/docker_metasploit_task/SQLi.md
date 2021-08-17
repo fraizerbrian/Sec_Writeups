@@ -1,34 +1,4 @@
-# Portswigger writeup
-
-- [ ] **Server Side Attacks**
-	- [x] SQL injection 
-	- [ ] Authentication
-	- [ ] Directory Traversal
-	- [ ] Command Injection
-	- [ ] Business Logic Vulnerabilities
-	- [ ] Information Disclosure
-	- [ ] Access Control
-	- [ ] Server-Side Request Forgery
-	- [ ] XXE Injection
-- [ ] **Client Side Attacks**
-	- [ ] Cross-site scripting (XSS)
-	- [ ] Cross-site request forgery (CSRF)
-	- [ ] Cross-origin resource sharing (CORS)
-	- [ ] Clickjacking
-	- [ ] DOM-based vulnerabilities
-	- [ ] WebSockets
-- [ ] **Advanced**
-	- [ ] Insecure Deserialization
-	- [ ] Server-side template injection
-	- [ ] Web cache poisoning
-	- [ ] HTTP Host header attacks
-	- [ ] HTTP request smuggling
-	- [ ] OAuth authentication
-	
-
------------------------------------------------------------------------------------------
-
-## SQL Injection
+# PortSwigger - SQL Injection
 
 > SQL injection is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database.
 
