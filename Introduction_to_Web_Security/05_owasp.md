@@ -17,3 +17,7 @@ It includes:
   8. Insecure Deserialization
   9. Using components with known vulnerabilities
   10. Insufficient Logging & Monitoring
+  
+## Challenges
+1. Contribution
+2. One click

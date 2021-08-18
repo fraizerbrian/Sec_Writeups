@@ -52,7 +52,7 @@ foo://example.com:8042/over?there?name=bar#nose
 3. 3xx : Redirection
 4. 4xx : Client Error
 5. 5xx : Server Error
-- You can make an HTTP request from the terminal using **curl** command. eg :`curl [options] <URL>`
+- You can make an HTTP request from the terminal using **curl** command. eg :`curl [options] <URL>` => `curl -v <url>`
 
 ## Cookies
 - Small piece of data sent from a website to offer a reliable mechanism for websites to remember stateful information.
@@ -70,3 +70,7 @@ foo://example.com:8042/over?there?name=bar#nose
 2. Expire when browser is closed.
 3. More secure.
 4. Can store objects.
+
+## Challenges
+1. Greeks
+2. The Restricted Sessions

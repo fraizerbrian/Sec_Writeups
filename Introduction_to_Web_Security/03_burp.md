@@ -21,3 +21,7 @@ Burp's main feature is to intercept HTTP requests, you can modify the request an
   - Saves your time with proxy, to modify the same request for as many times as you ant and it will show you the response.
 5. Decoder
   - One can decode/encode any type of the encoding scheme.
+  
+## Challenges
+1. Encoding
+2. Hide me

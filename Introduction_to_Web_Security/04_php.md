@@ -82,3 +82,6 @@ echo $_SESSION['username'];
 ```
 
 To remove all the session variables and destroy them, use **session_unset()** and **session_destroy()**
+
+## Challenges
+1. Cheers
