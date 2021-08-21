@@ -916,5 +916,261 @@ Logging in to bandit26 from bandit25 should be fairly easy… The shell for user
 - password : uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
 
 ```
+bandit25@bandit:~$ ls
+bandit26.sshkey
+bandit25@bandit:~$ ssh bandit26@localhost -i bandit26.sshkey
+Could not create directory '/home/bandit25/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+...
+Connection to localhost closed.
+bandit25@bandit:~$ cat /etc/passwd | grep bandit26
+bandit26:x:11026:11026:bandit level 26:/home/bandit26:/usr/bin/showtext
+bandit25@bandit:~$ cat /usr/bin/showtext
+#!/bin/sh
+
+export TERM=linux
+
+more ~/text.txt
+exit 0
+bandit25@bandit:~$ 
+bandit25@bandit:~$ ssh -i bandit26.sshkey bandit26@localhost
+Could not create directory '/home/bandit25/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/bandit25/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+Linux bandit.otw.local 5.4.8 x86_64 GNU/Linux
+
+:/etc/bandit_pass/bandit26
+5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
+
+```
+
+26. Bandit26
+
+Good job getting a shell! Now hurry and grab the password for bandit27!
+> Commands you may need to solve this level
+> ls
+- ssh bandit26@bandit.labs.overthewire.org -p 2220
+- password : 5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
+
+```
+3ba3118a22e93127a4ed485be72ef5ea
+```
+
+27. Bandit27
+
+There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo. The password for the user bandit27-git is the same as for the user bandit27.
+
+Clone the repository and find the password for the next level.
+>Commands you may need to solve this level
+> git
+
+- ssh bandit27@bandit.labs.overthewire.org -p 2220
+- password : 3ba3118a22e93127a4ed485be72ef5ea
+```
+bandit27@bandit:~$ rm -rf /tmp/myrepo
+bandit27@bandit:~$ mkdir /tmp/myrepo
+bandit27@bandit:~$ cd /tmp/myrepo
+bandit27@bandit:/tmp/myrepo$ git clone ssh://bandit27-git@localhost/home/bandit27-git/repo
+Cloning into 'repo'...
+Could not create directory '/home/bandit27/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/bandit27/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit27-git@localhost's password: 
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (3/3), 288 bytes | 0 bytes/s, done.
+bandit27@bandit:/tmp/myrepo$ cd repo
+bandit27@bandit:/tmp/myrepo/repo$ ls
+README
+bandit27@bandit:/tmp/myrepo/repo$ cat README
+The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2
+bandit27@bandit:/tmp/myrepo/repo$ 
+```
+
+28. Bandit28
+
+There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo. The password for the user bandit28-git is the same as for the user bandit28.
+
+Clone the repository and find the password for the next level.
+>Commands you may need to solve this level
+>git
+- ssh bandit28@bandit.labs.overthewire.org -p 2220
+- password : 0ef186ac70e04ea33b4c1853d2526fa2
+```
+bandit28@bandit:~$ mkdir /tmp/mine28
+bandit28@bandit:~$ cd /tmp/mine28
+bandit28@bandit:/tmp/mine28$ git clone ssh://bandit28-git@localhost/home/bandit28-git/repo
+bandit28@bandit:/tmp/mine28$ ls
+repo
+bandit28@bandit:/tmp/mine28$ cd repo
+bandit28@bandit:/tmp/mine28/repo$ ls
+README.md
+bandit28@bandit:/tmp/mine28/repo$ cat README.md 
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: xxxxxxxxxx
+
+bandit28@bandit:/tmp/mine28/repo$ git log
+commit edd935d60906b33f0619605abd1689808ccdd5ee
+Author: Morla Porla <morla@overthewire.org>
+Date:   Thu May 7 20:14:49 2020 +0200
+
+    fix info leak
+
+commit c086d11a00c0648d095d04c089786efef5e01264
+Author: Morla Porla <morla@overthewire.org>
+Date:   Thu May 7 20:14:49 2020 +0200
+
+    add missing data
+
+commit de2ebe2d5fd1598cd547f4d56247e053be3fdc38
+Author: Ben Dover <noone@overthewire.org>
+Date:   Thu May 7 20:14:49 2020 +0200
+
+    initial commit of README.md
+
+bandit28@bandit:/tmp/mine28/repo$ git show edd935d60906b33f0619605abd1689808ccdd5ee
+commit edd935d60906b33f0619605abd1689808ccdd5ee
+Author: Morla Porla <morla@overthewire.org>
+Date:   Thu May 7 20:14:49 2020 +0200
+
+    fix info leak
+
+diff --git a/README.md b/README.md
+index 3f7cee8..5c6457b 100644
+--- a/README.md
++++ b/README.md
+@@ -4,5 +4,5 @@ Some notes for level29 of bandit.
+ ## credentials
+ 
+ - username: bandit29
+-- password: **bbc96594b4e001778eee9975372716b2**
++- password: xxxxxxxxxx
+ 
+bandit28@bandit:/tmp/mine28/repo$ 
+
+```
+
+29. Bandit29
+
+There is a git repository at ssh://bandit29-git@localhost/home/bandit29-git/repo. The password for the user bandit29-git is the same as for the user bandit29.
+
+Clone the repository and find the password for the next level.
+> Commands you may need to solve this level
+> git
+- ssh bandit29@bandit.labs.overthewire.org -p 2220
+- password : bbc96594b4e001778eee9975372716b2
+```
+bandit29@bandit:/tmp/mine29$ cd repo
+bandit29@bandit:/tmp/mine29/repo$ ls
+README.md
+bandit29@bandit:/tmp/mine29/repo$ cat README.md 
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: <no passwords in production!>
+
+bandit29@bandit:/tmp/mine29/repo$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/dev
+  remotes/origin/master
+  remotes/origin/sploits-dev
+bandit29@bandit:/tmp/mine29/repo$ git checkout dev
+Branch dev set up to track remote branch dev from origin.
+Switched to a new branch 'dev'
+bandit29@bandit:/tmp/mine29/repo$ ls
+code  README.md
+bandit29@bandit:/tmp/mine29/repo$ cat README.md
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: 5b90576bedb2cc04c86a9e924ce42faf
+
+bandit29@bandit:/tmp/mine29/repo$ 
+```
+
+30. Bandit30
+
+There is a git repository at ssh://bandit30-git@localhost/home/bandit30-git/repo. The password for the user bandit30-git is the same as for the user bandit30.
+
+Clone the repository and find the password for the next level.
+> Commands you may need to solve this level
+> git
+- ssh bandit30@bandit.labs.overthewire.org -p 2220
+- password : 5b90576bedb2cc04c86a9e924ce42faf
+```
+bandit30@bandit:~$ mkdir /tmp/mine30
+bandit30@bandit:~$ cd /tmp/mine30
+bandit30@bandit:/tmp/mine30$ git clone ssh://bandit30-git@localhost/home/bandit30-git/repo
+Cloning into 'repo'...
+...
+Receiving objects: 100% (4/4), 298 bytes | 0 bytes/s, done.
+bandit30@bandit:/tmp/mine30$ cd repo
+bandit30@bandit:/tmp/mine30/repo$ cat README.md
+just an epmty file... muahaha
+bandit30@bandit:/tmp/mine30/repo$ git log
+commit 3aefa229469b7ba1cc08203e5d8fa299354c496b
+Author: Ben Dover <noone@overthewire.org>
+Date:   Thu May 7 20:14:54 2020 +0200
+
+    initial commit of README.md
+bandit30@bandit:/tmp/mine30/repo$ git show
+commit 3aefa229469b7ba1cc08203e5d8fa299354c496b
+Author: Ben Dover <noone@overthewire.org>
+Date:   Thu May 7 20:14:54 2020 +0200
+
+    initial commit of README.md
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..029ba42
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1 @@
++just an epmty file... muahaha
+bandit30@bandit:/tmp/mine30/repo$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+bandit30@bandit:/tmp/mine30/repo$ git tag
+secret
+bandit30@bandit:/tmp/mine30/repo$ git show secret
+47e603bb428404d265f59c42920d81e5
+bandit30@bandit:/tmp/mine30/repo$ 
+```
+
+31. Bandit31
+
+There is a git repository at ssh://bandit31-git@localhost/home/bandit31-git/repo. The password for the user bandit31-git is the same as for the user bandit31.
+
+Clone the repository and find the password for the next level.
+> Commands you may need to solve this level
+> git
+
+- ssh bandit31@bandit.labs.overthewire.org -p 2220
+- password : 47e603bb428404d265f59c42920d81e5
+```
 
 ```
