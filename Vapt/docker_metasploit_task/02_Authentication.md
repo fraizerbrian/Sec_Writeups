@@ -164,17 +164,25 @@ To solve the lab, enumerate a valid username, brute-force this user's password, 
 
 > **Solution**
 
-Run burp and login with incorrect logins
-
+Run burp and login with incorrect logins then send to burp intruder, first off enumerate the usename by highlighting the incorrect username position, use the snipper attack type, add the usernames given on the payloads tab then on the options tab `Grep - Extract` and add the `Invalid username or password` response then start the attack. Do the same for the password then run the attack
 ![](images/authentication/lab2a.png)
 ![](images/authentication/lab2b.png)
 ![](images/authentication/lab2c.png)
 ![](images/authentication/lab2d.png)
 ![](images/authentication/lab2e.png)
+
+The username is `applications` and the password is `pass`
 ![](images/authentication/lab2f.png)
 
-
 ### **Username enumeration via response timing**
+
+This lab is vulnerable to username enumeration using its response times. To solve the lab, enumerate a valid username, brute-force this user's password, then access their account page.
+
+Your credentials: wiener:peter 
+
+> **Solution**
+
+
 ### **Broken brute-force protection, IP block**
 ### **Username enumeration via account lock**
 ### **Broken brute-force protection, multiple credentials per request**
