@@ -117,11 +117,11 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 	- [x] XXE
 	- [x] Remote File Inclusion (RFI)
 	- [x] Local File Inclusion (LFI)
-	- [ ] Unrestricted File Upload
-	- [ ] SQL Injection
-	- [ ] Insecure Deserialization
-	- [ ] IDOR
-	- [ ] XSS
+	- [x] Unrestricted File Upload
+	- [x] SQL Injection
+	- [x] Insecure Deserialization
+	- [x] IDOR
+	- [x] XSS
 	- [ ] CSRF
 	- [ ] Attacking JWT
 	- [ ] Sensitive Data Exposure
