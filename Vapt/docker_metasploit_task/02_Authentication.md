@@ -125,7 +125,7 @@ Implementations of HTTP basic authentication often don't support brute-force pro
 Wordlists: 
 - [Candidate usernames](https://portswigger.net/web-security/authentication/auth-lab-usernames)
 - [Candidate passwords](https://portswigger.net/web-security/authentication/auth-lab-passwords)
-### **Username enumeration via different responses**
+### **Lab 1: Username enumeration via different responses**
 
 [https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-different-responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-different-responses)
 
@@ -156,7 +156,7 @@ The password is `tigger`, now is to log into the account
 
 Successful login with username and email given.
 
-### **Username enumeration via subtly different responses**
+### **Lab 2: Username enumeration via subtly different responses**
 
 This lab is subtly vulnerable to username enumeration and password brute-force attacks.
 
@@ -174,7 +174,7 @@ Run burp and login with incorrect logins then send to burp intruder, first off e
 The username is `applications` and the password is `pass`
 ![](images/authentication/lab2f.png)
 
-### **Username enumeration via response timing**
+### **Lab 3: Username enumeration via response timing**
 
 This lab is vulnerable to username enumeration using its response times. To solve the lab, enumerate a valid username, brute-force this user's password, then access their account page.
 
@@ -182,15 +182,79 @@ Your credentials: wiener:peter
 
 > **Solution**
 
+Sending the page to Burp and trying to give multiple logins returns an error that times and gives access to another login after 30 minutes.
+![](images/authentication/lab3b.png)
 
-### **Broken brute-force protection, IP block**
-### **Username enumeration via account lock**
-### **Broken brute-force protection, multiple credentials per request**
-### **2FA simple bypass**
-### **2FA broken logic**
-### **2FA bypass using a brute-force attack**
-### **Brute-forcing a stay-logged-in cookie**
-### **Offline password cracking**
-### **Password reset broken logic**
-### **Password reset poisoning via middleware**
-### **Password brute-force via password change**
+This indicates that ones IP is blocked after too many invalid login attempts. Identify that the X-Forwarded-For header is supported that allows one to spoof their address and bypass the IP-based brute-force protection.
+
+Logging in with the username and password given `wiener:peter `, gives back a 302 redirection error page.
+![](images/authentication/lab3c.png)
+![](images/authentication/lab3d.png)
+
+When the username is valid, the response time is roughly the same, however, when you enter a valid username `wiener` the response time is increased depending on the length of the password is entered.
+
+Sending the request to Burp Intruder and select the attack type to **"Pitchfork"**, clear the selections and add _X-Forwarded-For_ header and the _username_ set the payload 1 to NUmbers range 1-100 with max fraction digits to 0. This will spoof your IP address preventing IP blocking. For the username add the usernames from the list given.
+
+![](images/authentication/lab3e.png)
+![](images/authentication/lab3f.png)
+
+Once the attack is complete, click "Columns" and select "Response received" and "Response completed" options to add them in the results table. The correct username takes slightly longer than others.
+
+![](images/authentication/lab3g.png)
+
+Create a new attack to enumerate for the password, change the username to the found username ie `adserver`. For the passwords payload add from the password list given then start the attack.
+
+Once the attack is done, find the response with a 302 status hence giving the password: `112233`.
+
+Log in with the found username and password to solve the lab.
+![](images/authentication/lab3h.png)
+![](images/authentication/lab3i.png)
+
+### **Lab 4: Broken brute-force protection, IP block**
+
+![](images/authentication/lab4a.png)
+![](images/authentication/lab4b.png)
+![](images/authentication/lab4c.png)
+![](images/authentication/lab4d.png)
+![](images/authentication/lab4e.png)
+
+### **Lab 5: Username enumeration via account lock**
+
+![](images/authentication/lab5a.png)
+![](images/authentication/lab5b.png)
+![](images/authentication/lab5c.png)
+![](images/authentication/lab5d.png)
+![](images/authentication/lab5e.png)
+![](images/authentication/lab5f.png)
+![](images/authentication/lab5g.png)
+![](images/authentication/lab5h.png)
+![](images/authentication/lab5i.png)
+
+### **Lab 6: Broken brute-force protection, multiple credentials per request**
+
+![](images/authentication/lab6a.png)
+![](images/authentication/lab6b.png)
+
+### **Lab 7: 2FA simple bypass**
+
+Log in to your own account ie `wiener:peter`. Your 2FA verification code will be sent to you by email. Click the `"Email client"` button to access your emails. 
+
+Go to your account page and make a note of the URL. 
+
+Log out of your account. 
+
+Log in using the victim's credentials. 
+
+When prompted for the verification code, manually change the URL to navigate to `/my-account?id=carlos`. 
+
+The lab is solved when the page loads. 
+
+### **Lab 8: 2FA broken logic**
+
+
+### **Lab 9: 2FA bypass using a brute-force attack**
+### **Lab 10: Brute-forcing a stay-logged-in cookie**
+### **Lab 11: Offline password cracking**
+### **Lab 12: Password reset broken logic**
+### **Lab 13: Password reset poisoning via middleware**
+### **Lab 14: Password brute-force via password change**
