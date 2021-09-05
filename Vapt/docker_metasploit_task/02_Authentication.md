@@ -250,7 +250,10 @@ When prompted for the verification code, manually change the URL to navigate to 
 The lab is solved when the page loads. 
 
 ### **Lab 8: 2FA broken logic**
-
+![](images/authentication/lab8.png)
+![](images/authentication/lab8a.png)
+![](images/authentication/lab8b.png)
+![](images/authentication/lab8c.png)
 
 ### **Lab 9: 2FA bypass using a brute-force attack**
 ### **Lab 10: Brute-forcing a stay-logged-in cookie**
