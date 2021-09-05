@@ -213,9 +213,15 @@ Being an oracle database, I'll use `'+UNION+SELECT+banner,+NULL+FROM+v$version--
 
 ### **Lab 6: SQL injection attack, querying the database type and version on MySQL and Microsoft**
 
+> Done
+
 ### **Lab 7: SQL injection attack, listing the database contents on non-Oracle databases**
 
+> Done
+
 ### **Lab 8: SQL injection attack, listing the database contents on Oracle**
+
+> Done
 
 ### **Lab 9: Blind SQL injection with conditional responses**
 
@@ -456,3 +462,4 @@ SELECT * FROM products WHERE category = 'Tech gifts' or 1=1--' AND released = 1
 
 ### **Lab 16: SQL injection vulnerability allowing login bypass**
 
+> Done

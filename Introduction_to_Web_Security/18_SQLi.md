@@ -174,5 +174,5 @@ sqlmap --dbms=mysql -u "$URL" -D "$DATABASE" -T "$TABLE" --dump
 
 ##Challenges
 1. Owls Blog
-2. bypass the world
+2. bypass the world >> FLAG{Y0u_Ar3_S0_C00L_T0d4y}
 3. Easy access

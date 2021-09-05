@@ -63,7 +63,7 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 	- [ ] OAuth authentication
 
 ## OWASP TOP 10
-- [ ] Injection
+- [x] Injection
 - [ ] Broken Authentication
 - [ ] Sensitive Data Exposure
 - [ ] XML External Entities (XXE)
@@ -73,6 +73,11 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 - [ ] Insecure Deserialization
 - [ ] Using Components with know Vulnerabilities
 - [ ] Insufficient Logging & Monitoring
+
+## OWASP Bricks
+- [ ] Login Pages
+- [ ] File Upload Pages
+- [ ] Content Pages
 
 ## Attack Vectors
 - [ ] DVWA

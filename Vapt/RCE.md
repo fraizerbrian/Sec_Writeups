@@ -63,7 +63,3 @@ Avoid using user input inside evaluated code.
 
 Never let a user edit the content of files that might be parsed by the respective languages, including not letting a user decide the name and extensions of files he or she might upload or create in the web application.
 
-### What Not to do to prevent RCE
-1.
-
-
