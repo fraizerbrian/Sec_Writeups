@@ -9,7 +9,9 @@ Each level has access to the password of the next level. Your job is to somehow 
 Start here:
 
 > Username: natas0
+> 
 > Password: natas0
+> 
 > URL:      http://natas0.natas.labs.overthewire.org
 
 
