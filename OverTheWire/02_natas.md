@@ -28,8 +28,10 @@ Looking at the source code and the password for level 1 is there ie :
 ## 2. Natas 1 - 2 
 
 > Username: natas1
+> 
 > Password: gtVrDuiDfck831PqWsLEZy5gyDz1clto
-> URL: http://natas1.natas.labs.overthewire.org
+> 
+>  URL: http://natas1.natas.labs.overthewire.org
 
 In this level, right clicking has been blocked but one can still be able to view the source code by using the shortcut `Ctrl+U`
 
@@ -38,7 +40,8 @@ In this level, right clicking has been blocked but one can still be able to view
 ```
 
 ## 3. Natas 2 - 3
-
-> Username: natas2
-> Password: ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi
-> URL: http://natas2.natas.labs.overthewire.org
+```
+Username: natas2
+Password: ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi
+URL: http://natas2.natas.labs.overthewire.org
+```
