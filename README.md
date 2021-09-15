@@ -36,6 +36,42 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 	- [x] 8180/tcp  open     http        Apache Tomcat/Coyote JSP engine 1.1
 	- [x] 8787/tcp  open     drb         Ruby DRb RMI (Ruby 1.8; path /usr/lib/ruby/1.8/drb)
 
+## Penetration Testing Course
+- [x] Penetration Testing
+	- [x] Introduction
+	- [x] Kali
+	- [x] Recon
+	- [x] Scanning
+	- [x] Enumeration
+	- [x] Metasploit
+	- [x] Software Exploitation
+	- [x] Post Exploitation
+	- [x] Privilege Escalation
+	- [x] Persistence
+	- [x] Pivoting
+	- [x] Sniffing
+	- [x] Wifi Attacks
+	- [x] Vulnerability Assessment
+- [x] Introduction to Web Security
+	- [x] Introduction to Web Security
+	- [x] Web Application Basics
+	- [x] Burp Suite
+	- [x] PHP basics
+	- [x] OWASP Top 10
+	- [x] Server Side Request Forgery (SSRF)
+	- [x] Remote Code Execution
+	- [x] XXE
+	- [x] Remote File Inclusion (RFI)
+	- [x] Local File Inclusion (LFI)
+	- [x] Unrestricted File Upload
+	- [x] SQL Injection
+	- [x] Insecure Deserialization
+	- [x] IDOR
+	- [x] XSS
+	- [x] CSRF
+	- [x] Attacking JWT
+	- [x] Sensitive Data Exposure
+
 ## PortSwigger
 - [ ] **Server Side Attacks**
 	- [x] SQL injection 
@@ -73,11 +109,15 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 - [ ] Insecure Deserialization
 - [ ] Using Components with know Vulnerabilities
 - [ ] Insufficient Logging & Monitoring
+- [ ] OWASP Documentation
 
 ## OWASP Bricks
 - [x] Login Pages
 - [ ] File Upload Pages
 - [ ] Content Pages
+
+## MITRE
+- [ ] Mitre ATT&CK documentation
 
 ## Attack Vectors
 - [ ] DVWA
@@ -95,41 +135,6 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 - [ ] phpMyAdmin
 - [ ] Twiki
 
-## Penetration Testing Course
-- [x] Penetration Testing
-	- [x] Introduction
-	- [x] Kali
-	- [x] Recon
-	- [x] Scanning
-	- [x] Enumeration
-	- [x] Metasploit
-	- [x] Software Exploitation
-	- [x] Post Exploitation
-	- [x] Privilege Escalation
-	- [x] Persistence
-	- [x] Pivoting
-	- [x] Sniffing
-	- [x] Wifi Attacks
-	- [x] Vulnerability Assessment
-- [x] Introduction to Web Security
-	- [x] Introduction to Web Security
-	- [x] Web Application Basics
-	- [x] Burp Suite
-	- [x] PHP basics
-	- [x] OWASP Top 10
-	- [x] Server Side Request Forgery (SSRF)
-	- [x] Remote Code Execution
-	- [x] XXE
-	- [x] Remote File Inclusion (RFI)
-	- [x] Local File Inclusion (LFI)
-	- [x] Unrestricted File Upload
-	- [x] SQL Injection
-	- [x] Insecure Deserialization
-	- [x] IDOR
-	- [x] XSS
-	- [x] CSRF
-	- [x] Attacking JWT
-	- [x] Sensitive Data Exposure
 
 ## Networking
 - [ ] Network Attacks
