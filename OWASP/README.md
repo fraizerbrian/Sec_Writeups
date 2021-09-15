@@ -7,9 +7,10 @@ OWASP approach creates a defined Testing Methodology that will be _consistent_, 
 The OWASP Web Application Security Testing method is based on the **black box** approach ie tester knows nothing or has very little information about the application to be tested.
 
 Testing model consists of:
-		1. Tester : Who performs the testing activities
-		2. Tools and Methodology : Testing guide project
-		3. Application: Black box to test
+
+	1. Tester : Who performs the testing activities
+	2. Tools and Methodology : Testing guide project
+	3. Application: Black box to test
 
 ## Passive Testing
 
@@ -22,18 +23,19 @@ At the end of this phase the tester should understand all the access points and 
 ## Active Testing
 
 Tester begins to use the methodologies described in the following sections.
-		1. Information gathering
-		2. Configuration and Deployment Management Testing
-		3. Identity Management Testing
-		4. Authentication Testing
-		5. Authorization Testing
-		6. Session Management Testing
-		7. Input Validation Testing
-		8. Error Handling
-		9. Cryptography
-		10. Business Logic Testing
-		11. Client-side Testing
-		12. API Testing
+
+	1. Information gathering
+	2. Configuration and Deployment Management Testing
+	3. Identity Management Testing
+	4. Authentication Testing
+	5. Authorization Testing
+	6. Session Management Testing
+	7. Input Validation Testing
+	8. Error Handling
+	9. Cryptography
+	10. Business Logic Testing
+	11. Client-side Testing
+	12. API Testing
 
 ------------------------------------------------------------------------------------------------
 ## CHECKLIST
