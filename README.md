@@ -75,7 +75,7 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 - [ ] Insufficient Logging & Monitoring
 
 ## OWASP Bricks
-- [ ] Login Pages
+- [x] Login Pages
 - [ ] File Upload Pages
 - [ ] Content Pages
 
@@ -111,7 +111,7 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 	- [x] Sniffing
 	- [x] Wifi Attacks
 	- [x] Vulnerability Assessment
-- [ ] Introduction to Web Security
+- [x] Introduction to Web Security
 	- [x] Introduction to Web Security
 	- [x] Web Application Basics
 	- [x] Burp Suite
@@ -127,9 +127,9 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 	- [x] Insecure Deserialization
 	- [x] IDOR
 	- [x] XSS
-	- [ ] CSRF
-	- [ ] Attacking JWT
-	- [ ] Sensitive Data Exposure
+	- [x] CSRF
+	- [x] Attacking JWT
+	- [x] Sensitive Data Exposure
 
 ## Networking
 - [ ] Network Attacks
