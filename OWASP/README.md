@@ -180,3 +180,4 @@ Tester begins to use the methodologies described in the following sections.
 	- [ ] API Testing.
 		- [ ] Testing GraphQL
 	- [ ] Reporting
+	
