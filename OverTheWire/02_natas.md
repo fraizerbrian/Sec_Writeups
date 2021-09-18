@@ -465,7 +465,21 @@ def xor_encrypt(key, cookie):
 data = xor_encrypt(key, new_cookie)
 print(data)
 ```
+
+Use the console log in the webpage and add the cookie by typing:
+```javascript
+document.cookie="data=ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK"
+```
+
 The password is:
 ```
 The password for natas12 is EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
 ```
+
+## Natas 12
+
+> Username: natas12
+> 
+> Password: EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
+> 
+> URL: http://natas12.natas.labs.overthewire.org
