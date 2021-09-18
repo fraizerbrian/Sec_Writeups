@@ -63,8 +63,8 @@ Tester begins to use the methodologies described in the following sections.
 	- [ ] Penetration Testing Methodologies
 - [ ] Web Application Security Testing
 	- [ ] Information Gathering
-		- [ ] Conduct Search Engine Discovery Recon for info leakage
-		- [ ] Fingerprint web server
+		- [x] Conduct Search Engine Discovery Recon for info leakage
+		- [x] Fingerprint web server
 		- [ ] Review webserver metafiles for information leakage
 		- [ ] Enumerate applications on web server
 		- [ ] Review webpage content for information leakage

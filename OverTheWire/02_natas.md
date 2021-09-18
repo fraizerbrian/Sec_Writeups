@@ -221,7 +221,7 @@ Access granted. The password for natas7 is 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
 > 
 > Password: 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
 > 
-> URL: http://natas7/natas.labs.overthewire.org/
+> URL: http://natas7.natas.labs.overthewire.org/
 
 On logging in the page has the following pages in it:
 ![](images/natas/natas7a.png)
@@ -244,4 +244,47 @@ DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
 > 
 > Password: DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
 > 
-> URL http://natas8/
+> URL http://natas8.natas.labs.overthewire.org/
+
+![](images/natas/natas8a.png)
+In this level, we get an input page and a button `"View sourcecode"` that gives us the pages source code.
+
+The source code also has a php code embedded in it.
+
+```php
+<?
+
+$encodedSecret = "3d3d516343746d4d6d6c315669563362";
+
+function encodeSecret($secret) {
+    return bin2hex(strrev(base64_encode($secret)));
+}
+
+if(array_key_exists("submit", $_POST)) {
+    if(encodeSecret($_POST['secret']) == $encodedSecret) {
+    print "Access granted. The password for natas9 is <censored>";
+    } else {
+    print "Wrong secret";
+    }
+}
+?>
+```
+
+With the above, the input should be equal to **3d3d516343746d4d6d6c315669563362** but is modified in the encodeSecret.
+
+This can be reversed by a simple python script;
+```python
+import base64
+secret = "3d3d516343746d4d6d6c315669563362"
+secret = bytes.fromhex(secret)
+secret = secret[::-1]
+secret = base64.decodebytes(secret)
+print(secret)
+```
+
+The output of running for this is `oubWYf2kBq`. Input this in the `Input secret` method. Tjos returns the password for level 9 as:
+```
+Access granted. The password for natas9 is W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl 
+```
+
+
