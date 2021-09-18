@@ -323,7 +323,7 @@ nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
 > 
 > Password: nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
 > 
-> URL: http://natas9.natas.labs.overthewire.org/
+> URL: http://natas10.natas.labs.overthewire.org/
 
 ![](images/natas/natas10a.png)
 
@@ -356,3 +356,116 @@ The password for this level is:
 ```
 
 ## Natas11
+
+> Username: natas11
+> 
+> Password: U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+> 
+> URL: http://natas11.natas.labs.overthewire.org/
+
+![](images/natas/natas11a.png)
+
+In this level, we get the following PHP code;
+```php
+<?
+
+$defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+
+function xor_encrypt($in) {
+    $key = '<censored>';
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+    $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+function loadData($def) {
+    global $_COOKIE;
+    $mydata = $def;
+    if(array_key_exists("data", $_COOKIE)) {
+    $tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE["data"])), true);
+    if(is_array($tempdata) && array_key_exists("showpassword", $tempdata) && array_key_exists("bgcolor", $tempdata)) {
+        if (preg_match('/^#(?:[a-f\d]{6})$/i', $tempdata['bgcolor'])) {
+        $mydata['showpassword'] = $tempdata['showpassword'];
+        $mydata['bgcolor'] = $tempdata['bgcolor'];
+        }
+    }
+    }
+    return $mydata;
+}
+
+function saveData($d) {
+    setcookie("data", base64_encode(xor_encrypt(json_encode($d))));
+}
+
+$data = loadData($defaultdata);
+
+if(array_key_exists("bgcolor",$_REQUEST)) {
+    if (preg_match('/^#(?:[a-f\d]{6})$/i', $_REQUEST['bgcolor'])) {
+        $data['bgcolor'] = $_REQUEST['bgcolor'];
+    }
+}
+
+saveData($data);
+
+
+
+?>
+```
+
+The code adds the color of the background into the cookie page. 
+
+The cookie also contains the field of showpassword set to **no**. Modifying the value to **yes** will get the value of the password but we cannot get the password since we do not have the key for the `xor_encrypt()` function which can be gotten by a `known-plaintext attack` using the following Python script to get the secret key.
+
+```python
+import base64
+import json
+
+ciphertext = b"ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw="
+ciphertext = base64.decodebytes(ciphertext)
+plaintext = {"showpassword":"no", "bgcolor":"#ffffff"}
+
+plaintext = json.dumps(plaintext).encode('utf-8').replace(b" ",b"")
+
+def xor_decrypt(plaintext, ciphertext):
+	secret = ""
+	for x in range(len(plaintext)):
+		secret += str(chr(ciphertext[x] ^ plaintext[x%len(plaintext)]))
+	return secret
+
+secret = xor_decrypt(ciphertext, plaintext)
+print(secret)
+```
+
+The above outputs the following: `qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq`
+
+The new cookie should now have the value of show password as **yes** by using the following python script:
+```python
+import base64
+import json
+
+key = b"qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq"
+new_cookie = {"showpassword": "yes", "bgcolor":"#ffffff"}
+new_cookie = json.dumps(new_cookie).encode('utf-8').replace(b" ", b"")
+
+
+def xor_encrypt(key, cookie):
+	data = ""
+	for x in range(len(key)):
+		data += str(chr(cookie[x] ^ key[x%len(key)]))
+	
+	data = base64.encodebytes(data.encode('utf-8'))
+	return data
+
+data = xor_encrypt(key, new_cookie)
+print(data)
+```
+The password is:
+```
+The password for natas12 is EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
+```
