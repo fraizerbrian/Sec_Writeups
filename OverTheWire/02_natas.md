@@ -289,11 +289,11 @@ Access granted. The password for natas9 is W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
 
 ## Natas9
 
-> Username: natas8
+> Username: natas9
 > 
 > Password: W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
 > 
-> URL http://natas9.natas.labs.overthewire.org/
+> URL: http://natas9.natas.labs.overthewire.org/
 
 In this level we get the following php code
 ```php
@@ -317,3 +317,42 @@ The password is:
 nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
 ```
 
+## Natas10
+
+> Username: natas10
+> 
+> Password: nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+> 
+> URL: http://natas9.natas.labs.overthewire.org/
+
+![](images/natas/natas10a.png)
+
+We get the following php code in this level
+```php
+<?
+$key = "";
+
+if(array_key_exists("needle", $_REQUEST)) {
+    $key = $_REQUEST["needle"];
+}
+
+if($key != "") {
+    if(preg_match('/[;|&]/',$key)) {
+        print "Input contains an illegal character!";
+    } else {
+        passthru("grep -i $key dictionary.txt");
+    }
+}
+?>
+```
+
+From the above, the following characters are filtered so we can't use them `/[;|&]/`
+
+We can try to read all files using `.*` and read from `/etc/natas_webpass/` ie `.* cat /etc/natas_webpass/natas11`
+
+The password for this level is:
+```
+/etc/natas_webpass/natas11:U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+```
+
+## Natas11
