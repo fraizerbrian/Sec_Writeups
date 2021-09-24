@@ -275,7 +275,77 @@ Click "My account" to solve the lab.
 
 ### **Lab 9: 2FA bypass using a brute-force attack**
 ### **Lab 10: Brute-forcing a stay-logged-in cookie**
+
+This lab allows users to stay logged in even after they close their browser session. The cookie used to provide this functionality is vulnerable to brute-forcing.
+
+To solve the lab, brute-force Carlos's cookie to gain access to his "My account" page.
+
+  - Your credentials: wiener:peter
+  - Victim's username: carlos 
+
+Once a user is logged in, and sets the `Stay logged in` to **True**, a cookie is set for that session and the cookie is in **Base64**, once decoded, it comes in the form of `Username+":"+md5Hashpassword`
+![](images/authentication/lab10a.png)
+![](images/authentication/lab10b.png)
+![](images/authentication/lab10c.png)
+![](images/authentication/lab10d.png)
+![](images/authentication/lab10e.png)
+![](images/authentication/lab10f.png)
+![](images/authentication/lab10g.png)
+
 ### **Lab 11: Offline password cracking**
+
+This lab stores the user's password hash in a cookie. The lab also contains an XSS vulnerability in the comment functionality. To solve the lab, obtain Carlos's stay-logged-in cookie and use it to crack his password. Then, log in as carlos and delete his account from the "My account" page.
+
+  - Your credentials: wiener:peter
+  - Victim's username: carlos
+
+This uses a similar functionalit to the stay-logged-in cookie. the stay-logged-in cookie is base64 encoded and is in the format `username+':'+md5hashpassword`
+
+We can steal the victim's user cookie.
+
+The exploit server contains also a stay-logged-in text which when decoded we get the cookie for Carlos' account:
+![](images/authentication/lab11.png)
+
+The comments section of the blogs is vulnerable to XSS using `stored XSS` hence one can use the following exploit:
+![](images/authentication/lab11a.png)
+
+Exploit the server and use the GET request from the victim containing their 'stay-logged-in' cookie
+
+Using Burp decoder, the result will be:
+![](images/authentication/lab11b.png)
+
+copy the hash and use an md5 decoder and it decodes the password as `onceuponatime`
+![](images/authentication/lab11y.png)
+
+Log into the Victim's account, go to the victim's account and delete their account.
+![](images/authentication/lab11y.png)
+
 ### **Lab 12: Password reset broken logic**
+
+This lab's password reset functionality is vulnerable. To solve the lab, reset Carlos's password then log in and access his "My account" page.
+
+  - Your credentials: wiener:peter
+  - Victim's username: carlos
+
+When logging in, click the forgot password section to reset a new password, while running burp.
+
+Click the email client button so as to view the reset password link and reset to any password.
+![](images/authentication/lab12w.png)
+
+Since this is intercepted, go to HTTP History and view the `POST /forgot-password-token` request. It contains the password but is hidden.
+![](images/authentication/lab12x.png)
+
+Send this to Burp Repeater and delete the _forgot-password-token_ parameter that is on the URL and request body.
+
+Resend the same request from the HTTP history and change the _username_ parameter to _carlos_ and set the new password to any password the send the request.
+![](images/authentication/lab12y.png)
+
+In the browser, use the username and login to carlos' account using the reset password.
+![](images/authentication/lab12z.png)
+
 ### **Lab 13: Password reset poisoning via middleware**
+
+This lab is vulnerable to password reset poisoning. The user carlos will carelessly click on any links in emails that he receives. To solve the lab, log in to Carlos's account. You can log in to your own account using the following credentials: wiener:peter. Any emails sent to this account can be read via the email client on the exploit server.
+
+
 ### **Lab 14: Password brute-force via password change**
