@@ -273,8 +273,7 @@ Click "My account" to solve the lab.
 ![](images/authentication/lab8b.png)
 ![](images/authentication/lab8c.png)
 
-### **Lab 9: 2FA bypass using a brute-force attack**
-### **Lab 10: Brute-forcing a stay-logged-in cookie**
+### **Lab 9: Brute-forcing a stay-logged-in cookie**
 
 This lab allows users to stay logged in even after they close their browser session. The cookie used to provide this functionality is vulnerable to brute-forcing.
 
@@ -292,7 +291,7 @@ Once a user is logged in, and sets the `Stay logged in` to **True**, a cookie is
 ![](images/authentication/lab10f.png)
 ![](images/authentication/lab10g.png)
 
-### **Lab 11: Offline password cracking**
+### **Lab 10: Offline password cracking**
 
 This lab stores the user's password hash in a cookie. The lab also contains an XSS vulnerability in the comment functionality. To solve the lab, obtain Carlos's stay-logged-in cookie and use it to crack his password. Then, log in as carlos and delete his account from the "My account" page.
 
@@ -320,7 +319,7 @@ copy the hash and use an md5 decoder and it decodes the password as `onceuponati
 Log into the Victim's account, go to the victim's account and delete their account.
 ![](images/authentication/lab11y.png)
 
-### **Lab 12: Password reset broken logic**
+### **Lab 11: Password reset broken logic**
 
 This lab's password reset functionality is vulnerable. To solve the lab, reset Carlos's password then log in and access his "My account" page.
 
@@ -343,12 +342,7 @@ Resend the same request from the HTTP history and change the _username_ paramete
 In the browser, use the username and login to carlos' account using the reset password.
 ![](images/authentication/lab12z.png)
 
-### **Lab 13: Password reset poisoning via middleware**
-
-This lab is vulnerable to password reset poisoning. The user carlos will carelessly click on any links in emails that he receives. To solve the lab, log in to Carlos's account. You can log in to your own account using the following credentials: wiener:peter. Any emails sent to this account can be read via the email client on the exploit server.
-
-
-### **Lab 14: Password brute-force via password change**
+### **Lab 12: Password brute-force via password change**
 
 This lab's password change functionality makes it vulnerable to brute-force attacks. To solve the lab, use the list of candidate passwords to brute-force Carlos's account and access his "My account" page.
 
