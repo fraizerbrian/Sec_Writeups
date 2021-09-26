@@ -99,3 +99,8 @@ WSTG-<version>-<category>-<number>
 - The report should also be clear to the developer in pin-pointing the exact function that is affected by the vulnerability and associated recommendations for resolving issues in a language that the developer will understand.
 - The report should also allow another security tester to reproduce the results.
 
+## Testing Techniques
+1. Manual Inspections & Reviews
+2. Threat Modelling
+3. Code Review
+4. Penetration Testing

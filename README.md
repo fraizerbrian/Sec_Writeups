@@ -75,8 +75,8 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 ## PortSwigger
 - [ ] **Server Side Attacks**
 	- [x] SQL injection 
-	- [ ] Authentication
-	- [ ] Directory Traversal
+	- [x] Authentication
+	- [ ] Directory Traversal - _ongoing_
 	- [ ] Command Injection
 	- [ ] Business Logic Vulnerabilities
 	- [ ] Information Disclosure
