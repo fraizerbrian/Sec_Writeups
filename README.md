@@ -77,8 +77,8 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 	- [x] SQL injection 
 	- [x] Authentication
 	- [x] Directory Traversal 
-	- [ ] Command Injection - _ongoing_
-	- [ ] Business Logic Vulnerabilities
+	- [x] Command Injection
+	- [ ] Business Logic Vulnerabilities - _ongoing_
 	- [ ] Information Disclosure
 	- [ ] Access Control
 	- [ ] Server-Side Request Forgery
