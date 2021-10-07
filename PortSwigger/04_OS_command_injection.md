@@ -136,7 +136,7 @@ wwwuser.kgji2ohoyw.web-attacker.com
 
 ## Lab 1 : OS Command injection, simple case
 
- This lab contains an OS command injection vulnerability in the product stock checker.
+This lab contains an OS command injection vulnerability in the product stock checker.
 
 The application executes a shell command containing user-supplied product and store IDs, and returns the raw output from the command in its response.
 
@@ -144,11 +144,67 @@ To solve the lab, execute the whoami command to determine the name of the curren
 
 **Solution**
 
+With burpsuite running select on an item and go through the item, once checked at the bottom you can find the store locations and find how many units are in the store.
+
+Send the page to **Repeater**, and edit the storeId to:
+
+```
+productId=1&storeId=2|whoami
+```
+![](images/os_command_injection/lab1b.png)
+
 ## Lab 2 : Blind OS command injection with time delays
+
+This lab contains a blind OS command injection vulnerability in the feedback function.
+
+The application executes a shell command containing the user-supplied details. The output from the command is not returned in the response.
+
+To solve the lab, exploit the blind OS command injection vulnerability to cause a 10 second delay. 
+
+**Solution**
+
+The vulnerability in this lab is in the feedback section.
+![](images/os_command_injection/lab2a.png)
+
+With burp running, submit the feedback form.
+
+On the proxy http history, send the POST request of the feedback submit form to burp Repeater, then inject the OS command with a time delay in the either name, email or subject part of the feedback form that will initiate a time delay
+![](images/os_command_injection/lab2b.png) 
 
 ## Lab 3 : Blind OS command injection with output redirection
 
+This lab contains a blind OS command injection vulnerability in the feedback function.
+
+The application executes a shell command containing the user-supplied details. The output from the command is not returned in the response. However, you can use output redirection to capture the output from the command. There is a writable folder at:
+```
+/var/www/images/
+```
+The application serves the images for the product catalog from this location. You can redirect the output from the injected command to a file in this folder, and then use the image loading URL to retrieve the contents of the file.
+
+To solve the lab, execute the whoami command and retrieve the output. 
+
+**Solution**
+
+Heading over to the feedback form, with burp running, submit the feedback form. On burpsuite, send the request over to Repeater and edit the email section of the email to obtain the user details and output it to a txt file using `||whoami>/var/www/images/output.txt||`
+![](images/os_command_injection/lab3a.png)
+
+This in turn returns a response code of 200 OK.
+
+Go back to the home page and view any item. with burp running, view the image and send the image request to burp, edit the filename to extract the file that we had created earlier on that then reveals the username and password:
+![](images/os_command_injection/lab3b.png)
+
 ## Lab 4 : Blind OS command injection with out-of-band interaction
 
-## Lab 5 : Blind OS command injection with out-of-band data exfiltration
+This lab contains a blind OS command injection vulnerability in the feedback function.
+
+The application executes a shell command containing the user-supplied details. The command is executed asynchronously and has no effect on the application's response. It is not possible to redirect output into a location that you can access. However, you can trigger out-of-band interactions with an external domain.
+
+To solve the lab, exploit the blind OS command injection vulnerability to issue a DNS lookup to Burp Collaborator. 
+
+> The solution described here is sufficient simply to trigger a DNS lookup and so solve the lab. In a real-world situation, you would use Burp Collaborator client to verify that your payload had indeed triggered a DNS lookup.
+
+**Solution**
+
+Run the feedback form and intercept using burp, edit the `email` parameter to that it can be able to carry a DNS lookup to `"burpcollaborator.net"`
+![](images/os_command_injection/lab4a.png)
 
