@@ -1,6 +1,6 @@
 # VAPT
 
-This is a documentation ofpart of my learning curve and the things that I shall be going through as a PenTester.
+This is a documentation of part of my learning curve and the things that I shall be going through as a PenTester.
 
 ## Vapt
 - [x] **Information Gathering**
@@ -78,7 +78,7 @@ This is a documentation ofpart of my learning curve and the things that I shall 
 	- [x] Authentication
 	- [x] Directory Traversal 
 	- [x] Command Injection
-	- [ ] Business Logic Vulnerabilities - _ongoing_
+	- [ ] Business Logic Vulnerabilities 
 	- [ ] Information Disclosure
 	- [ ] Access Control
 	- [ ] Server-Side Request Forgery
