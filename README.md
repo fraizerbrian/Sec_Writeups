@@ -2,41 +2,51 @@
 
 This is a documentation of part of my learning curve and the things that I shall be going through as a PenTester.
 
-## Vapt
-- [x] **Information Gathering**
-	- [x] Network scan
-	- [x] Identify web server, technologies and database
-	- [x] Vulnerable versions
-- [x] **Exploiting the Various ports**
-				PORT      STATE    SERVICE     VERSION
-	- [x] 21/tcp    open     ftp         vsftpd 2.3.4
-	- [x] 22/tcp    open     ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
-	- [x] 23/tcp    open     telnet      Linux telnetd
-	- [x] 25/tcp    open     smtp        Postfix smtpd
-	- [x] 80/tcp    open     http        Apache httpd 2.2.8 ((Ubuntu) DAV/2)
-	- [x] 111/tcp   open     rpcbind     2 (RPC #100000)
-		- [x] 36349/tcp open     status      1 (RPC #100024)
-		- [x] 44733/tcp open     status      1 (RPC #100024)
-	- [x] 139/tcp   open     netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
-		- [x] 445/tcp   open     netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
-	- [x] 512/tcp   open     exec        netkit-rsh rexecd
-	- [x] 513/tcp   open     login
-	- [x] 514/tcp   open     shell       Netapp ONTAP rshd
-	- [x] 1099/tcp  open     java-rmi    GNU Classpath grmiregistry
-		- [x] 44951/tcp open     java-rmi    GNU Classpath grmiregistry
-	- [x] 1524/tcp  open     ingreslock?
-	- [x] 2121/tcp  open     ftp         ProFTPD 1.3.1
-	- [x] 3306/tcp  open     mysql       MySQL 5.0.51a-3ubuntu5
-	- [x] 3632/tcp  open     distccd?
-	- [x] 5900/tcp  open     vnc         VNC (protocol 3.3)
-	- [x] 6000/tcp  open     X11         (access denied)
-	- [x] 6667/tcp  filtered irc
-	- [x] 6697/tcp  filtered ircs-u
-	- [x] 8009/tcp  open     ajp13       Apache Jserv (Protocol v1.3)
-	- [x] 8180/tcp  open     http        Apache Tomcat/Coyote JSP engine 1.1
-	- [x] 8787/tcp  open     drb         Ruby DRb RMI (Ruby 1.8; path /usr/lib/ruby/1.8/drb)
 
-## Penetration Testing Course
+<details>
+<summary>Port Enumerations & Services</summary>
+	
++ [x] **Information Gathering**
+	+ [x] Network scan
+	+ [x] Identify web server, technologies and database
+	+ [x] Vulnerable versions
++ [x] **Exploiting the Various ports**
+	
+	**PORT      STATE    SERVICE     VERSION**
+	
+	+ [x] 21/tcp    open     ftp         vsftpd 2.3.4
+	+ [x] 22/tcp    open     ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
+	+ [x] 23/tcp    open     telnet      Linux telnetd
+	+ [x] 25/tcp    open     smtp        Postfix smtpd
+	+ [x] 80/tcp    open     http        Apache httpd 2.2.8 ((Ubuntu) DAV/2)
+	+ [x] 111/tcp   open     rpcbind     2 (RPC #100000)
+		+ [x] 36349/tcp open     status      1 (RPC #100024)
+		+ [x] 44733/tcp open     status      1 (RPC #100024)
+	+ [x] 139/tcp   open     netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+		+ [x] 445/tcp   open     netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+	+ [x] 512/tcp   open     exec        netkit-rsh rexecd
+	+ [x] 513/tcp   open     login
+	+ [x] 514/tcp   open     shell       Netapp ONTAP rshd
+	+ [x] 1099/tcp  open     java-rmi    GNU Classpath grmiregistry
+		+ [x] 44951/tcp open     java-rmi    GNU Classpath grmiregistry
+	+ [x] 1524/tcp  open     ingreslock?
+	+ [x] 2121/tcp  open     ftp         ProFTPD 1.3.1
+	+ [x] 3306/tcp  open     mysql       MySQL 5.0.51a-3ubuntu5
+	+ [x] 3632/tcp  open     distccd?
+	+ [x] 5900/tcp  open     vnc         VNC (protocol 3.3)
+	+ [x] 6000/tcp  open     X11         (access denied)
+	+ [x] 6667/tcp  filtered irc
+	+ [x] 6697/tcp  filtered ircs-u
+	+ [x] 8009/tcp  open     ajp13       Apache Jserv (Protocol v1.3)
+	+ [x] 8180/tcp  open     http        Apache Tomcat/Coyote JSP engine 1.1
+	+ [x] 8787/tcp  open     drb         Ruby DRb RMI (Ruby 1.8; path /usr/lib/ruby/1.8/drb)
+	
+</details>
+
+
+<details>
+<summary>Cyber Talents PenTesting Course #2020</summary>
+
 - [x] Penetration Testing
 	- [x] Introduction
 	- [x] Kali
@@ -72,7 +82,26 @@ This is a documentation of part of my learning curve and the things that I shall
 	- [x] Attacking JWT
 	- [x] Sensitive Data Exposure
 
-## PortSwigger
+</details>
+
+<details>
+<summary>TryHackMe Labs</summary>
+
+- [x] [Owasp](Tryhackme/Owasp)
+
+</details>
+
+<details>
+<summary>HackTheBox Labs</summary>
+
+- [x] [backdoor](htb/machines/backdoor)
+- [x] [secret](htb/machines/secret)
+
+</details>
+
+<details>
+<summary>PortSwigger</summary>
+
 - [ ] **Server Side Attacks**
 	- [x] SQL injection 
 	- [x] Authentication
@@ -98,7 +127,11 @@ This is a documentation of part of my learning curve and the things that I shall
 	- [ ] HTTP request smuggling
 	- [ ] OAuth authentication
 
-## OWASP TOP 10
+</details>
+
+<details>
+<summary>OWASP TOP 10</summary>
+
 - [x] Injection
 - [ ] Broken Authentication
 - [ ] Sensitive Data Exposure
@@ -111,15 +144,20 @@ This is a documentation of part of my learning curve and the things that I shall
 - [ ] Insufficient Logging & Monitoring
 - [ ] OWASP Documentation
 
-## OWASP Bricks
-- [x] Login Pages
-- [ ] File Upload Pages
-- [ ] Content Pages
+</details>
 
-## MITRE
+
+<details>
+<summary>MITRE</summary>
+
 - [ ] Mitre ATT&CK documentation
 
-## Attack Vectors
+</details>
+
+
+<details>
+<summary>Web Security Practice labs</summary>
+
 - [ ] DVWA
 	- [ ] Brute Fore
 	- [ ] Command Execution
@@ -135,6 +173,11 @@ This is a documentation of part of my learning curve and the things that I shall
 - [ ] phpMyAdmin
 - [ ] Twiki
 
+</details>
 
-## Networking
+<details>
+<summary>Networking</summary>
+
 - [ ] Network Attacks
+
+</details>
