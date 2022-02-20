@@ -1,6 +1,6 @@
 # VAPT
 
-This is a documentation of part of my learning curve and the things that I shall be going through as a PenTester.
+This is a documentation of part of my learning curve, tryhackme rooms, hackthebox machines and CTF competitions that I'll be taking part in.
 
 
 <details>
