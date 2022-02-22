@@ -215,3 +215,44 @@ Being that the search bar sends a request to the server and the server relays th
 ```
 9aaf4bbea5c30d00a1f5bbcfce4db6d4b0efe0bf
 ```
+
+2. Perform a persistent XSS
+
+Login to the admin account then navigate to the **Last Login IP** page for the attack.
+
+With Burp intercept on, catch the requests then forward the last logout request to the server. When signing back into the admin account navigate to the last login page again and see the XSS alert.
+
+Both the `True-Client-IP` header and the `X-Forwarded-For` header are similar and tell the server or proxy what the IP of the client is.
+```
+149aa8ce13d7a4a8a931472308e269c94dc5f156
+```
+
+3. Perform a reflected XSS
+
+Login to the admin account and navigate to the `Order History` page. When there, from there you will see a "Track" icon, click on the page and it brings the track result page back. 
+![](images/owasp13.png)
+
+The id is paired with the order. `/#/track-result?id=5267-b1963d7a501ad2bc`
+
+We use the iframe XSS `<iframe src%3D"javascript:alert(`xss`)">` in place of the `5267-b1963d7a501ad2bc`.
+
+```
+23cefee1527bde039295b2616eeb29e1edc660a0
+```
+
+-----------------------------------------------------------------------------
+
+## Task 8 : Exploration
+
+If you wish to tackle some of the harder challenges that were not covered within this room, check out the /#/score-board/ section on Juice-shop. Here you can see your completed tasks as well as other tasks in varying difficulty.
+
+**Challenge**
+
+Access the /#/score-board/page
+
+```
+7efd3174f9dd5baa03a7882027f2824d2f72d86e
+```
+
+Hurraayyy, that was quite some delicious juice. Some great learning experience.
+
