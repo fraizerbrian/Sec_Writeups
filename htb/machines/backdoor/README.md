@@ -316,5 +316,6 @@ Length: 120
 ----------------------------------
 ```
 
-
-- We can use `/proc/[PID]/cmdline` which basically represents a currently running process in Linux systems.
+![](images/nc.png)
+![](images/gdb.png)
+![](images/backdoor_sys.png)
